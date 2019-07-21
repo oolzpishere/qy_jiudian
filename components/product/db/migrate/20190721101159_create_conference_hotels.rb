@@ -1,8 +1,5 @@
 class CreateConferenceHotels < ActiveRecord::Migration[5.2]
   def change
-    create_table :conference_hotels do |t|
-
-      t.timestamps
-    end
+    create_join_table :conferences, :hotels
   end
 end
