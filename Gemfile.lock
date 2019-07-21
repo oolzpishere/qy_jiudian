@@ -1,3 +1,23 @@
+PATH
+  remote: components/account
+  specs:
+    account (0.1.0)
+      rails (~> 5.2.3)
+
+PATH
+  remote: components/admin
+  specs:
+    admin (0.1.0)
+      account
+      product
+      rails (~> 5.2.3)
+
+PATH
+  remote: components/product
+  specs:
+    product (0.1.0)
+      rails (~> 5.2.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -337,6 +357,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  account!
+  admin!
   awesome_print
   babel-transpiler
   better_errors
@@ -365,6 +387,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   mini_magick (~> 4.8)
   pg
+  product!
   pry
   puma (~> 3.11)
   railroady

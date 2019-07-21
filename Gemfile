@@ -95,13 +95,12 @@ gem "jquery-slick-rails"
 gem 'sidekiq'
 gem 'sinatra'
 
-# my engines
-# gem 'frontend', path: 'components/frontend'
-# gem 'shared', path: 'components/shared'
-# gem 'work', path: 'components/work'
-# gem 'admin', path: 'components/admin'
-# gem 'account', path: 'components/account'
-
 gem 'font-awesome-sass', '~> 5.8.1'
 
 gem 'babel-transpiler'
+
+# my engines
+gem 'account', path: 'components/account'
+gem 'admin', path: 'components/admin'
+
+gem 'product', path: 'components/product'
