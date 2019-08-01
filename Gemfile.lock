@@ -2,6 +2,7 @@ PATH
   remote: components/account
   specs:
     account (0.1.0)
+      devise
       rails (~> 5.2.3)
 
 PATH
@@ -9,6 +10,8 @@ PATH
   specs:
     admin (0.1.0)
       account
+      bootstrap
+      devise
       product
       rails (~> 5.2.3)
 
@@ -69,6 +72,8 @@ GEM
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
+    autoprefixer-rails (9.6.1)
+      execjs
     awesome_print (1.8.0)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
@@ -84,6 +89,10 @@ GEM
       debug_inspector (>= 0.0.1)
     bootsnap (1.4.4)
       msgpack (~> 1.0)
+    bootstrap (4.3.1)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 1.14.3, < 2)
+      sassc-rails (>= 2.0.0)
     builder (3.2.3)
     byebug (11.0.1)
     cancan (1.6.10)
@@ -216,6 +225,7 @@ GEM
       shellany (~> 0.0)
     orm_adapter (0.5.0)
     pg (1.1.4)
+    popper_js (1.14.5)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -301,6 +311,12 @@ GEM
     sassc (2.0.1)
       ffi (~> 1.9)
       rake
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     selenium-webdriver (3.142.3)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)

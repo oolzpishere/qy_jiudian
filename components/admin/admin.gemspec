@@ -31,4 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'account'
   spec.add_dependency 'product'
+
+  spec.add_dependency 'devise'
+  spec.add_dependency 'bootstrap'
 end

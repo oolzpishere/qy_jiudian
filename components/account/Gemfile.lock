@@ -1,22 +1,8 @@
 PATH
-  remote: ../account
+  remote: .
   specs:
     account (0.1.0)
       devise
-      rails (~> 5.2.3)
-
-PATH
-  remote: ../product
-  specs:
-    product (0.1.0)
-      rails (~> 5.2.3)
-
-PATH
-  remote: .
-  specs:
-    admin (0.1.0)
-      account
-      product
       rails (~> 5.2.3)
 
 GEM
@@ -149,8 +135,6 @@ PLATFORMS
 
 DEPENDENCIES
   account!
-  admin!
-  product!
   sqlite3
 
 BUNDLED WITH

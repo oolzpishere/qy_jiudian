@@ -5,4 +5,6 @@ Admin::Engine.routes.draw do
     root to: "conferences#index"
   end
 
+  devise_for :users, module: 'devise', class_name: "Account::User"
+
 end

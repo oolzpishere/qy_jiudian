@@ -13,3 +13,8 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
+
+gem 'account',path: "../account"
+gem 'product',path: "../product"
+
+gem 'bootstrap'
