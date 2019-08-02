@@ -16,5 +16,3 @@ gemspec
 
 gem 'account',path: "../account"
 gem 'product',path: "../product"
-
-gem 'bootstrap'

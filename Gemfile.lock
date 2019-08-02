@@ -12,6 +12,7 @@ PATH
       account
       bootstrap
       devise
+      devise-i18n
       product
       rails (~> 5.2.3)
 
