@@ -16,6 +16,8 @@ PATH
   specs:
     admin (0.1.0)
       account
+      bootstrap
+      devise
       product
       rails (~> 5.2.3)
 
@@ -64,7 +66,13 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (9.0.0)
+    autoprefixer-rails (9.6.1)
+      execjs
     bcrypt (3.1.13)
+    bootstrap (4.3.1)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 1.14.3, < 2)
+      sassc-rails (>= 2.0.0)
     builder (3.2.3)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
@@ -75,6 +83,8 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.8.0)
+    execjs (2.7.0)
+    ffi (1.11.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.6.0)
@@ -95,6 +105,7 @@ GEM
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
+    popper_js (1.14.5)
     rack (2.0.7)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -126,6 +137,15 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    sassc (2.0.1)
+      ffi (~> 1.9)
+      rake
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -136,6 +156,7 @@ GEM
     sqlite3 (1.4.1)
     thor (0.20.3)
     thread_safe (0.3.6)
+    tilt (2.0.9)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     warden (1.2.8)
@@ -150,6 +171,7 @@ PLATFORMS
 DEPENDENCIES
   account!
   admin!
+  bootstrap
   product!
   sqlite3
 
