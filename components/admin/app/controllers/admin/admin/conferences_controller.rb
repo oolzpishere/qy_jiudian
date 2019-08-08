@@ -1,7 +1,7 @@
 require_dependency "admin/application_controller"
 
 module Admin
-  class ConferencesController < ApplicationController
+  class Admin::ConferencesController < Admin::ApplicationController
     before_action :set_conference, only: [:show, :edit, :update, :destroy]
 
     # GET /conferences

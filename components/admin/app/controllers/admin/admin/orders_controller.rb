@@ -1,7 +1,7 @@
 require_dependency "admin/application_controller"
 
 module Admin
-  class OrdersController < ApplicationController
+  class Admin::OrdersController < Admin::ApplicationController
     before_action :set_order, only: [:show, :edit, :update, :destroy]
 
     # GET /orders

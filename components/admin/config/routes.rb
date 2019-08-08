@@ -1,15 +1,14 @@
 Admin::Engine.routes.draw do
-  scope path: :admin do
+  scope path: "/admin", module: "admin" do
     resources :conferences
     resources :orders
 
-    root to: "conferences#index"
+    root to: "conferences#index", :as => :admin_root
   end
 
   scope path: "/user", module: "user" do
     resources :orders
-
-    root to: "orders#index"
+    root to: "orders#index", :as => :user_root
   end
 
   # namespace :user do
