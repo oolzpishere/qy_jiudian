@@ -56,7 +56,21 @@ module Admin
 
       # Only allow a trusted parameter "white list" through.
       def conference_params
-        params.fetch(:conference, {})
+        params.fetch(:conference, {}).permit(
+          :name,
+          :sale_from,
+          :sale_to
+        )
       end
+
+      def set_attribute_types
+        @attribute_types = {
+          # id: "Field::String",
+          name: "Field::String",
+          sale_from: "Field::DateTime",
+          sale_to: "Field::DateTime",
+        }
+      end
+
   end
 end
