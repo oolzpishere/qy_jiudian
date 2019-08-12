@@ -63,6 +63,16 @@ module Admin
         )
       end
 
+      # copy from permit.
+      # at most 4 columns
+      def set_show_page_attributes
+        @show_page_attributes = [
+          :name,
+          :sale_from,
+          :sale_to
+        ]
+      end
+
       def set_attribute_types
         @attribute_types = {
           # id: "Field::String",
