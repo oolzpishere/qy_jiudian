@@ -1,6 +1,7 @@
 Admin::Engine.routes.draw do
   scope path: "/admin", module: "admin" do
     resources :conferences
+    resources :hotels
     resources :orders
 
     root to: "conferences#index", :as => :admin_root
