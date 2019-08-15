@@ -5,10 +5,11 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.integer :count
       t.string :names
       t.string :contact
-      t.integer :room
+      t.string :phone
+      # t.integer :room
       t.integer :price
       t.integer :breakfast
-      t.integer :room_number
+      # t.integer :room_number
       t.date :checkin
       t.date :checkout
       t.integer :nights
