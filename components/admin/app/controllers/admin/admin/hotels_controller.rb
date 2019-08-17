@@ -45,7 +45,7 @@ module Admin
     # DELETE /admin/hotels/1
     def destroy
       @hotel.destroy
-      redirect_to admin_hotels_url, notice: 'Hotel was successfully destroyed.'
+      redirect_to admin.hotels_url, notice: 'Hotel was successfully destroyed.'
     end
 
     private
