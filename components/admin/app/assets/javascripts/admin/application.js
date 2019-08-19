@@ -16,5 +16,5 @@
 //= require moment
 //= require moment/zh-cn
 //= require datetime_picker
-//= require cocoon
+//= require selectize
 //= require_tree .

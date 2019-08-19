@@ -21,6 +21,7 @@ module Admin
 
     # GET /orders/1/edit
     def edit
+      1.times { @order.rooms.build } if @order.rooms.empty?
     end
 
     # POST /orders

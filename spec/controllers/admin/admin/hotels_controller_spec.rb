@@ -6,6 +6,7 @@ RSpec.describe Admin::Admin::HotelsController, type: :controller do
     {
       id: 1,
       name: "hotel-name",
+      conference_ids: ["1"],
       twin_beds: "25",
       queen_bed: "20",
       three_beds: "15",
@@ -45,6 +46,10 @@ RSpec.describe Admin::Admin::HotelsController, type: :controller do
 
   describe "Authorise admin" do
     login_admin
+
+    before(:each) do
+      FactoryBot.create(:conf)
+    end
 
     describe "GET #index" do
       it "returns a success response" do

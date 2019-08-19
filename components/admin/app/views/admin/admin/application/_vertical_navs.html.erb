@@ -1,7 +1,10 @@
 <ul class="nav flex-column">
   <% @conferences.each do |conf| %>
   <li class="nav-item">
-    <a class="nav-link active" href="#" style="text-decoration: underline;"><%= conf.name %></a>
+    <% class_names = ["nav-link", "btn", "mt-2"] %>
+    <% params["conf"] == conf.name ? class_names <<  ["active", "btn-primary"] : class_names << ["btn-secondary"] %>
+
+    <%= link_to conf.name, admin.hotels_path(conf: conf.name) , class: class_names.join(" ") %>
   </li>
   <% end %>
 </ul>

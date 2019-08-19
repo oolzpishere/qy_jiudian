@@ -41,4 +41,6 @@ $(document).on("ready page:load turbolinks:load", function() {
     addMore("#rooms_ul")
   });
 
+  $('#hotel_conference_selection').selectize();
+
 });

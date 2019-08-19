@@ -16,6 +16,7 @@ module Admin
     # GET /admin/hotels/new
     def new
       @hotel = Product::Hotel.new
+      1.times { @hotel.conferences.build }
     end
 
     # GET /admin/hotels/1/edit
@@ -66,6 +67,7 @@ module Admin
           :three_beds_price,
           :other_twin_beds_price,
           :breakfast,
+          conference_ids: []
         )
       end
 
@@ -90,6 +92,7 @@ module Admin
           three_beds_price: "Field::Number",
           other_twin_beds_price: "Field::Number",
           breakfast: "Field::Number",
+          conferences: {field_type: "Field::HasManySelection", show: ["name"], namespace: "product"},
         }
       end
   end
