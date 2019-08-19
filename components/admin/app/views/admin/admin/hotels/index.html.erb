@@ -5,7 +5,7 @@
   </div>
   <div class="col-auto">
     <span>
-      <%= link_to 'New Conferences', new_hotel_path, class: "btn btn-success my-auto" %>
+      <%= link_to 'New Conferences', new_conference_hotel_path, class: "btn btn-success my-auto" %>
     </span>
   </div>
 </div>
@@ -27,7 +27,7 @@
           <td><%= item.try(spa) %></td>
         <% end %>
         <td>
-          <%= link_to 'Show', item %>
+          <%= link_to 'Show', admin.hotel_path(item) %>
           <%= link_to 'Edit', admin.edit_hotel_path(item) %>
           <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>

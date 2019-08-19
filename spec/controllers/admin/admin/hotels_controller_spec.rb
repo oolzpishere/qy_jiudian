@@ -35,15 +35,6 @@ RSpec.describe Admin::Admin::HotelsController, type: :controller do
 
   let(:valid_session) { {} }
 
-  describe "Unauthorised admin" do
-    describe "GET #index" do
-      it "returns a success response" do
-        get :index, params: {}, session: valid_session
-        expect(response).to redirect_to("/admins/sign_in")
-      end
-    end
-  end
-
   describe "Authorise admin" do
     login_admin
 
@@ -51,10 +42,12 @@ RSpec.describe Admin::Admin::HotelsController, type: :controller do
       FactoryBot.create(:conf)
     end
 
+    let(:conf) { Product::Conference.find("1") }
+
     describe "GET #index" do
       it "returns a success response" do
         hotel = Product::Hotel.create! valid_attributes
-        get :index, params: {}, session: valid_session
+        get :index, params: {conference_id: conf.id}, session: valid_session
         expect(response).to be_success
       end
     end
@@ -69,7 +62,7 @@ RSpec.describe Admin::Admin::HotelsController, type: :controller do
 
     describe "GET #new" do
       it "returns a success response" do
-        get :new, params: {}, session: valid_session
+        get :new, params: {conference_id: conf.id}, session: valid_session
         expect(response).to be_success
       end
     end
@@ -86,7 +79,7 @@ RSpec.describe Admin::Admin::HotelsController, type: :controller do
       context "with valid params" do
         it "creates a new item" do
           expect {
-            post :create, params: {hotel: valid_attributes}
+            post :create, params: {conference_id: conf.id, hotel: valid_attributes}
           }.to change(Product::Hotel, :count).by(1)
         end
       end
@@ -98,7 +91,7 @@ RSpec.describe Admin::Admin::HotelsController, type: :controller do
         it "updates the requested item" do
           hotel = Product::Hotel.create! valid_attributes
           hotel_org = hotel.dup
-          put :update, params: {id: hotel.to_param, hotel: new_attributes}, session: valid_session
+          put :update, params: {conference_id: conf.id, id: hotel.to_param, hotel: new_attributes}, session: valid_session
           hotel.reload
           expect(hotel_org).to_not eq(hotel)
         end

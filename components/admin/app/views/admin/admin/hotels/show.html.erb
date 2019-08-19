@@ -1,4 +1,4 @@
 <p id="notice"><%= notice %></p>
 
 <%= link_to 'Edit', admin.edit_hotel_path(@hotel) %> |
-<%= link_to 'Back', admin.hotels_path %>
+<%= link_to 'Back', request.referer || admin.admin_root_path %>

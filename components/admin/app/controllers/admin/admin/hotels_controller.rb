@@ -2,7 +2,9 @@ require_dependency "admin/application_controller"
 
 module Admin
   class Admin::HotelsController < Admin::ApplicationController
-    before_action :set_admin_hotel, only: [:show, :edit, :update, :destroy]
+    before_action :set_hotel, only: [:show, :edit, :update, :destroy]
+
+    before_action :set_conference, only: [:index, :new, :create]
 
     # GET /admin/hotels
     def index
@@ -28,7 +30,7 @@ module Admin
       @hotel = Product::Hotel.new(hotel_params)
 
       if @hotel.save
-        redirect_to @hotel, notice: 'Hotel was successfully created.'
+        redirect_back(fallback_location: admin.admin_root_path, notice: 'Hotel was successfully created.')
       else
         render :new
       end
@@ -37,7 +39,7 @@ module Admin
     # PATCH/PUT /admin/hotels/1
     def update
       if @hotel.update(hotel_params)
-        redirect_to @hotel, notice: 'Hotel was successfully updated.'
+        redirect_back(fallback_location: admin.admin_root_path, notice: 'Hotel was successfully updated.')
       else
         render :edit
       end
@@ -46,12 +48,16 @@ module Admin
     # DELETE /admin/hotels/1
     def destroy
       @hotel.destroy
-      redirect_to admin.hotels_url, notice: 'Hotel was successfully destroyed.'
+      redirect_back(fallback_location: admin.admin_root_path,notice: 'Hotel was successfully destroyed.')
     end
 
     private
+
+      def set_conference
+        @conference = Product::Conference.find(params[:conference_id])
+      end
       # Use callbacks to share common setup or constraints between actions.
-      def set_admin_hotel
+      def set_hotel
         @hotel = Product::Hotel.find(params[:id])
       end
 
