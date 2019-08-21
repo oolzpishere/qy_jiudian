@@ -5,7 +5,7 @@ module Admin
     before_action :set_order, only: [:show, :edit, :update, :destroy]
 
     # for nested resources
-    before_action :set_conference, only: [:index, :new, :create]
+    before_action :set_conference, only: [:index, :new, :create, :edit]
     before_action :set_hotel, only: [:index, :new, :create]
 
     # GET /orders
@@ -58,7 +58,12 @@ module Admin
     private
 
       def set_conference
-        @conference = Product::Conference.find(params[:conference_id])
+        if params[:conference_id]
+          @conference = Product::Conference.find(params[:conference_id])
+        else
+          @conference = @order.conference
+        end
+
       end
 
       def set_hotel
@@ -76,6 +81,8 @@ module Admin
           :id,
           :group,
           :count,
+          :conference_id,
+          :hotel_id,
           :names,
           :contact,
           :phone,
@@ -99,21 +106,21 @@ module Admin
       end
 
       def set_attribute_types
-        @attribute_types = {
-          # id: "Field::String",
-          group: "Field::Number",
-          # count: "Field::Number",
-          rooms: {field_type: "Field::HasMany", show: ["names", "room_number"]},
-          # names: "Field::String",
-          contact: "Field::String",
-          phone: "Field::String",
-          price: "Field::Number",
-          breakfast: "Field::Number",
-          checkin: "Field::DateTime",
-          checkout: "Field::DateTime",
-          nights: "Field::Number",
-          total_price: "Field::Number",
-        }
+        # @attribute_types = {
+        #   # id: "Field::String",
+        #   group: "Field::Number",
+        #   # count: "Field::Number",
+        #   rooms: {field_type: "Field::HasMany", show: ["names", "room_number"]},
+        #   # names: "Field::String",
+        #   contact: "Field::String",
+        #   phone: "Field::String",
+        #   price: "Field::Number",
+        #   breakfast: "Field::Number",
+        #   checkin: "Field::DateTime",
+        #   checkout: "Field::DateTime",
+        #   nights: "Field::Number",
+        #   total_price: "Field::Number",
+        # }
       end
 
   end

@@ -10,6 +10,10 @@ module Admin
     # GET /admin/hotels
     def index
       @hotels = @conference.hotels
+      respond_to do |format|
+        format.html {}
+        format.json {render json: @hotels}
+      end
     end
 
     # GET /admin/hotels/1
