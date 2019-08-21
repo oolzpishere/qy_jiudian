@@ -3,6 +3,9 @@ class CreateOrders < ActiveRecord::Migration[5.2]
     create_table :orders do |t|
       t.integer :group
       t.integer :count
+      t.belongs_to :conference, index: true
+      t.belongs_to :hotel, index: true
+      t.string :room_type
       t.string :names
       t.string :contact
       t.string :phone

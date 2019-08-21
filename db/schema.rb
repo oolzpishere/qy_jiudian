@@ -65,8 +65,12 @@ ActiveRecord::Schema.define(version: 2019_08_13_161129) do
   create_table "orders", force: :cascade do |t|
     t.integer "group"
     t.integer "count"
+    t.integer "conference_id"
+    t.integer "hotel_id"
+    t.string "room_type"
     t.string "names"
     t.string "contact"
+    t.string "phone"
     t.integer "price"
     t.integer "breakfast"
     t.date "checkin"
@@ -75,6 +79,8 @@ ActiveRecord::Schema.define(version: 2019_08_13_161129) do
     t.integer "total_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["conference_id"], name: "index_orders_on_conference_id"
+    t.index ["hotel_id"], name: "index_orders_on_hotel_id"
   end
 
   create_table "rooms", force: :cascade do |t|

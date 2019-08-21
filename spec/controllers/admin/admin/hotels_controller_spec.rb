@@ -48,7 +48,7 @@ RSpec.describe Admin::Admin::HotelsController, type: :controller do
       it "returns a success response" do
         hotel = Product::Hotel.create! valid_attributes
         get :index, params: {conference_id: conf.id}, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
@@ -56,14 +56,14 @@ RSpec.describe Admin::Admin::HotelsController, type: :controller do
       it "returns a success response" do
         hotel = Product::Hotel.create! valid_attributes
         get :show, params: {id: hotel.to_param}, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
     describe "GET #new" do
       it "returns a success response" do
         get :new, params: {conference_id: conf.id}, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
@@ -71,7 +71,7 @@ RSpec.describe Admin::Admin::HotelsController, type: :controller do
       it "returns a success response" do
         hotel = Product::Hotel.create! valid_attributes
         get :edit, params: {id: hotel.to_param}, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 

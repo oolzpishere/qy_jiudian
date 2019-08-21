@@ -4,6 +4,10 @@ module Admin
   class Admin::OrdersController < Admin::ApplicationController
     before_action :set_order, only: [:show, :edit, :update, :destroy]
 
+    # for nested resources
+    before_action :set_conference, only: [:index, :new, :create]
+    before_action :set_hotel, only: [:index, :new, :create]
+
     # GET /orders
     def index
       @orders = Product::Order.all
@@ -30,7 +34,7 @@ module Admin
 
       if @order.save
         # @order.rooms_attributes.save
-        redirect_to @order, notice: 'Order was successfully created.'
+        redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: 'Order was successfully created.')
       else
         render :new
       end
@@ -39,7 +43,7 @@ module Admin
     # PATCH/PUT /orders/1
     def update
       if @order.update(order_params)
-        redirect_to @order, notice: 'Order was successfully updated.'
+        redirect_back_or_default(admin.admin_root_path, notice: 'Order was successfully updated.')
       else
         render :edit
       end
@@ -48,10 +52,19 @@ module Admin
     # DELETE /orders/1
     def destroy
       @order.destroy
-      redirect_to orders_url, notice: 'Order was successfully destroyed.'
+      redirect_back(fallback_location: admin.admin_root_path,notice: 'Order was successfully destroyed.')
     end
 
     private
+
+      def set_conference
+        @conference = Product::Conference.find(params[:conference_id])
+      end
+
+      def set_hotel
+        @hotel = Product::Hotel.find(params[:hotel_id])
+      end
+
       # Use callbacks to share common setup or constraints between actions.
       def set_order
         @order = Product::Order.find(params[:id])
@@ -65,6 +78,7 @@ module Admin
           :count,
           :names,
           :contact,
+          :phone,
           :price,
           :breakfast,
           :checkin,
@@ -92,6 +106,7 @@ module Admin
           rooms: {field_type: "Field::HasMany", show: ["names", "room_number"]},
           # names: "Field::String",
           contact: "Field::String",
+          phone: "Field::String",
           price: "Field::Number",
           breakfast: "Field::Number",
           checkin: "Field::DateTime",

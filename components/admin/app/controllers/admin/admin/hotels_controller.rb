@@ -4,11 +4,12 @@ module Admin
   class Admin::HotelsController < Admin::ApplicationController
     before_action :set_hotel, only: [:show, :edit, :update, :destroy]
 
+    # for nested resources
     before_action :set_conference, only: [:index, :new, :create]
 
     # GET /admin/hotels
     def index
-      @hotels = Product::Hotel.all
+      @hotels = @conference.hotels
     end
 
     # GET /admin/hotels/1
@@ -30,7 +31,7 @@ module Admin
       @hotel = Product::Hotel.new(hotel_params)
 
       if @hotel.save
-        redirect_back(fallback_location: admin.admin_root_path, notice: 'Hotel was successfully created.')
+        redirect_to(admin.conference_hotels_path(@conference), notice: 'Hotel was successfully created.')
       else
         render :new
       end
@@ -39,7 +40,7 @@ module Admin
     # PATCH/PUT /admin/hotels/1
     def update
       if @hotel.update(hotel_params)
-        redirect_back(fallback_location: admin.admin_root_path, notice: 'Hotel was successfully updated.')
+        redirect_back_or_default(admin.admin_root_path, notice: 'Hotel was successfully updated.')
       else
         render :edit
       end

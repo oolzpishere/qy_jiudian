@@ -1,11 +1,14 @@
 Admin::Engine.routes.draw do
   scope path: "/admin", module: "admin" do
-    shallow do
-      resources :conferences do
-        resources :hotels
+
+    resources :conferences do
+      resources :hotels, only: [:index, :new, :create] do
+        resources :orders, only: [:index, :new, :create]
       end
     end
-    resources :orders
+    resources :hotels, only: [:show, :edit, :update, :destroy]
+    resources :orders, only: [:show, :edit, :update, :destroy]
+
 
     root to: "conferences#index", :as => :admin_root
   end

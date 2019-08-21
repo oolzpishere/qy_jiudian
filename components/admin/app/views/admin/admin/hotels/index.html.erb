@@ -5,7 +5,7 @@
   </div>
   <div class="col-auto">
     <span>
-      <%= link_to 'New Conferences', new_conference_hotel_path, class: "btn btn-success my-auto" %>
+      <%= link_to 'New Conferences', admin.new_conference_hotel_path, class: "btn btn-success my-auto" %>
     </span>
   </div>
 </div>
@@ -24,7 +24,7 @@
     <% @hotels.each do |item| %>
       <tr>
         <% @show_page_attributes.each do |spa| %>
-          <td><%= item.try(spa) %></td>
+          <td><%= link_to item.try(spa), admin.conference_hotel_orders_path(@conference, item) %></td>
         <% end %>
         <td>
           <%= link_to 'Show', admin.hotel_path(item) %>
