@@ -18,6 +18,10 @@ module Admin
 
     # GET /admin/hotels/1
     def show
+      respond_to do |format|
+        format.html {}
+        format.json {render json: @hotel}
+      end
     end
 
     # GET /admin/hotels/new
@@ -74,7 +78,8 @@ module Admin
           :queen_bed,
           :three_beds,
           :other_twin_beds,
-          :twin_and_queen_price,
+          :twin_beds_price,
+          :queen_bed_price,
           :three_beds_price,
           :other_twin_beds_price,
           :breakfast,

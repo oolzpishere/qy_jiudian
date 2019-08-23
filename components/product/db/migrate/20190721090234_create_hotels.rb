@@ -6,7 +6,8 @@ class CreateHotels < ActiveRecord::Migration[5.2]
       t.integer :queen_bed
       t.integer :three_beds
       t.integer :other_twin_beds
-      t.integer :twin_and_queen_price
+      t.integer :twin_beds_price
+      t.integer :queen_bed_price
       t.integer :three_beds_price
       t.integer :other_twin_beds_price
       t.integer :breakfast, default: 0

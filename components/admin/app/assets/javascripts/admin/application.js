@@ -17,4 +17,4 @@
 //= require moment/zh-cn
 //= require datetime_picker
 //= require selectize
-//= require_tree .
+//= require admin/has_many

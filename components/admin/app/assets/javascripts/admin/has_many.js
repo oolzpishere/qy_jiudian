@@ -41,42 +41,4 @@ $(document).on("ready page:load turbolinks:load", function() {
     addMore("#rooms_ul")
   });
 
-  $('#hotel_conference_selection').selectize();
-
-  var xhr;
-  var order_conference_selection, $order_conference_selection;
-  var order_hotel_selection, $order_hotel_selection;
-
-  $order_conference_selection = $('#order_conference_selection').selectize({
-    onChange: function(value) {
-      if (!value.length) return;
-      order_hotel_selection.disable();
-      order_hotel_selection.clear();
-      order_hotel_selection.clearOptions();
-      order_hotel_selection.load(function(callback) {
-        xhr && xhr.abort();
-        xhr = $.ajax({
-            url: '/admin/conferences/' + value + '/hotels.json',
-            success: function(results) {
-                order_hotel_selection.enable();
-                callback(results);
-            },
-            error: function() {
-                callback();
-            }
-        })
-      });
-    }
-  });
-
-  $order_hotel_selection = $('#order_hotel_selection').selectize({
-    valueField: 'id',
-    labelField: 'name',
-    searchField: ['name']
-  });
-
-  order_conference_selection  = $order_conference_selection[0].selectize;
-
-  order_hotel_selection = $order_hotel_selection[0].selectize;
-
 });

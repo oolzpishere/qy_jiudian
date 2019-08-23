@@ -6,7 +6,7 @@ module Admin
 
     # for nested resources
     before_action :set_conference, only: [:index, :new, :create, :edit]
-    before_action :set_hotel, only: [:index, :new, :create]
+    before_action :set_hotel, only: [:index, :new, :create, :edit]
 
     # GET /orders
     def index
@@ -59,15 +59,32 @@ module Admin
 
       def set_conference
         if params[:conference_id]
+          # for new
           @conference = Product::Conference.find(params[:conference_id])
         else
+          # for edit
           @conference = @order.conference
         end
 
       end
 
       def set_hotel
-        @hotel = Product::Hotel.find(params[:hotel_id])
+        if params[:conference_id]
+          # for new
+          @hotel = Product::Hotel.find(params[:hotel_id])
+        else
+          # for edit
+          @hotel = @order.hotel
+        end
+        set_room_types_array
+      end
+
+      def set_room_types_array
+        room_types_array = ["twin_beds", "queen_bed", "three_beds","other_twin_beds"]
+        room_type_translate = {"twin_beds" => "双人房","queen_bed" => "大床房", "three_beds" => "三人房","other_twin_beds" => "其它双人房" }
+        true_room_types_array = room_types_array.select {|name| @hotel[name] && @hotel[name] > 0}
+        @room_type_options = []
+        true_room_types_array.each {|name| @room_type_options << [room_type_translate[name], name ]}
       end
 
       # Use callbacks to share common setup or constraints between actions.
@@ -83,6 +100,7 @@ module Admin
           :count,
           :conference_id,
           :hotel_id,
+          :room_type,
           :names,
           :contact,
           :phone,

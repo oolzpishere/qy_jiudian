@@ -27,8 +27,18 @@
   </div>
 
   <div class="form-group">
+    <%= form.label :twin_beds_price, class: "h6" %>
+    <%= form.text_field :twin_beds_price, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <%= form.label :queen_bed, class: "h6" %>
     <%= form.text_field :queen_bed, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :queen_bed_price, class: "h6" %>
+    <%= form.text_field :queen_bed_price, class: "form-control" %>
   </div>
 
   <div class="form-group">
@@ -37,18 +47,13 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :other_twin_beds, class: "h6" %>
-    <%= form.text_field :other_twin_beds, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :twin_and_queen_price, class: "h6" %>
-    <%= form.text_field :twin_and_queen_price, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
     <%= form.label :three_beds_price, class: "h6" %>
     <%= form.text_field :three_beds_price, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :other_twin_beds, class: "h6" %>
+    <%= form.text_field :other_twin_beds, class: "form-control" %>
   </div>
 
   <div class="form-group">
@@ -65,3 +70,5 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+<%= javascript_include_tag "admin/form_selectize" %>
