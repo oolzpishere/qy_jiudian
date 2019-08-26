@@ -17,6 +17,7 @@
 //= require moment/zh-cn
 //= require datetime_picker
 //= require selectize
+//= require admin/date_time_picker
 //= require admin/has_many
 //= require admin/order
 //= require jquery.validate

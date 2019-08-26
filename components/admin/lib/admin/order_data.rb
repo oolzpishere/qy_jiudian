@@ -10,10 +10,10 @@ module Admin
     end
 
     def send_command(command)
-      if order.try(command)
-        order.send(command)
-      else
+      if self.try(command)
         self.send(command)
+      elsif order.try(command)
+        order.send(command)
       end
     end
 
@@ -62,15 +62,17 @@ module Admin
     end
 
     def check_in_out
-      order.checkin
+      checkin = order.checkin
+      checkout = order.checkout
+      "#{checkin.month}月#{checkin.day}-#{checkout.day}日"
     end
 
     def nights
-      order.nights
+      (order.checkout-order.checkin).to_i
     end
 
     def breakfast
-      order.breakfast
+      order.breakfast.to_i == 1 ? "含早" : "不含早"
     end
 
 

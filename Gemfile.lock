@@ -26,7 +26,7 @@ PATH
       product
       qcloud-sms (~> 1.0.1)
       rails (~> 5.2.3)
-      rubyzip
+      rubyzip (~> 1.2.1)
       selectize-rails
 
 PATH
