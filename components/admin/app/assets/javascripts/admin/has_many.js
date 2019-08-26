@@ -16,6 +16,8 @@ $(document).on("ready page:load turbolinks:load", function() {
 
        $(this).attr('name', thisname);
        $(this).attr('id', thisid);
+       $(this).attr('required', false);
+       // 清空内容
        var val = $(this).val();
        if (val == "0" || val == "1" ) {
          $(this).val('0');

@@ -1,0 +1,23 @@
+columns = %w(group id names phone twin_beds queen_bed three_beds other_twin_beds twin_beds_price queen_bed_price three_beds_price other_twin_beds_price breakfast room_number check_in_out nights)
+
+columns_zh = columns.map {|name| t('.' + name)}
+
+
+
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Orders") do |sheet|
+    sheet.add_row columns_zh
+    @orders.each_with_index do |order, i|
+      order.rooms.each do |room|
+        order_data = Admin::OrderData.new(order: order, i: i, room: room)
+        row = columns.map do |column|
+          order_data.send_command(column)
+        end
+
+        sheet.add_row row
+        # sheet.add_row [order.group, (i + 1), room.names, order.hotel.name, order.phone, order.room_type, ]
+      end
+
+    end
+end

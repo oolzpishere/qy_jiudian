@@ -5,8 +5,10 @@ module Admin
     before_action :set_order, only: [:show, :edit, :update, :destroy]
 
     # for nested resources
-    before_action :set_conference, only: [:index, :new, :create, :edit]
-    before_action :set_hotel, only: [:index, :new, :create, :edit]
+    before_action :set_conference, only: [:index, :new, :create, :edit, :download]
+    before_action :set_hotel, only: [:index, :new, :create, :edit, :download]
+    before_action :set_room_types_array, only: [:index, :new, :create, :edit, :download]
+
 
     # GET /orders
     def index
@@ -55,6 +57,16 @@ module Admin
       redirect_back(fallback_location: admin.admin_root_path,notice: 'Order was successfully destroyed.')
     end
 
+    def download
+      @orders = Product::Order.all
+      respond_to do |format|
+         format.xlsx {
+           render xlsx: 'download.xlsx.axlsx', layout: false, filename: "#{@conference.name}_#{@hotel.name}_#{Time.now}.xlsx"
+           # response.headers['Content-Disposition'] = 'attachment; filename="my_new_filename.xlsx"'
+         }
+      end
+    end
+
     private
 
       def set_conference
@@ -76,13 +88,13 @@ module Admin
           # for edit
           @hotel = @order.hotel
         end
-        set_room_types_array
+
       end
 
       def set_room_types_array
-        room_types_array = ["twin_beds", "queen_bed", "three_beds","other_twin_beds"]
+        @room_types_array = ["twin_beds", "queen_bed", "three_beds","other_twin_beds"]
         room_type_translate = {"twin_beds" => "双人房","queen_bed" => "大床房", "three_beds" => "三人房","other_twin_beds" => "其它双人房" }
-        true_room_types_array = room_types_array.select {|name| @hotel[name] && @hotel[name] > 0}
+        true_room_types_array = @room_types_array.select {|name| @hotel[name] && @hotel[name] > 0}
         @room_type_options = []
         true_room_types_array.each {|name| @room_type_options << [room_type_translate[name], name ]}
       end

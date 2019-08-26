@@ -2,6 +2,8 @@ module Product
   class Order < ApplicationRecord
     self.table_name = :orders
 
+    validates :group, presence: true
+
     belongs_to :conference
     belongs_to :hotel
 

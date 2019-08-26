@@ -1,5 +1,6 @@
 Admin::Engine.routes.draw do
   scope path: "/admin", module: "admin" do
+    get "/orders/download" => "orders#download"
 
     resources :conferences do
       resources :hotels, only: [:index, :new, :create] do
@@ -8,7 +9,6 @@ Admin::Engine.routes.draw do
     end
     resources :hotels, only: [:show, :edit, :update, :destroy]
     resources :orders, only: [:show, :edit, :update, :destroy]
-
 
     root to: "conferences#index", :as => :admin_root
   end

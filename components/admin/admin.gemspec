@@ -49,5 +49,14 @@ Gem::Specification.new do |spec|
   # spec.add_dependency "cocoon"
   spec.add_dependency "selectize-rails"
 
+  spec.add_dependency 'qcloud-sms', "~> 1.0.1"
+
+  spec.add_dependency 'rubyzip'
+  spec.add_dependency 'axlsx'
+  spec.add_dependency 'axlsx_rails', "~> 0.5.2"
+
+  # spec.add_dependency 'client_side_validations'
+  spec.add_dependency 'jquery-validation-rails'
+
 
 end

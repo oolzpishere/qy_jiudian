@@ -18,3 +18,6 @@
 //= require datetime_picker
 //= require selectize
 //= require admin/has_many
+//= require admin/order
+//= require jquery.validate
+//= require jquery.validate.localization/messages_zh
