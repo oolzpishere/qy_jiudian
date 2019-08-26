@@ -1,5 +1,6 @@
 
 $(document).on("ready page:load turbolinks:load", function() {
+  // #index
   if ($('#send_sms').length > 0) {
     $('#send_sms').on('click',function(){
       getAllChecked();
@@ -17,9 +18,13 @@ $(document).on("ready page:load turbolinks:load", function() {
     };
   }
 
+  // #form
+  // jquery form validation.
   if ($('#order_form').length > 0) {
     $('.has_many_field_li:first input:first').attr('required', 'required');
     $('#order_form').validate();
   }
+
+  
 
 });
