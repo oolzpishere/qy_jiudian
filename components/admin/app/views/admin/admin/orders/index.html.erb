@@ -1,12 +1,12 @@
 
-<div class="row">
+<div class="row mb-2">
   <div class="col">
-    <span class="h1">订单</span>
+    <span class="h3"><%= @hotel.name%> > 订单</span>
     <span class="badge badge-pill badge-primary"><%= @orders.count %></span>
   </div>
   <div class="col-auto">
     <span>
-      <%= link_to 'New Conferences', admin.new_conference_hotel_order_path, class: "btn btn-success my-auto" %>
+      <%= link_to t('.new_order'), admin.new_conference_hotel_order_path, class: "btn btn-success my-auto" %>
     </span>
   </div>
 </div>
@@ -16,7 +16,7 @@
     <tr>
       <th><%= check_box_tag 'select_all' %>  全选</th>
       <% @show_page_attributes.each do |spa| %>
-        <th scope="col"><%= spa.to_s %></th>
+        <th scope="col"><%= t(".#{spa.to_s}") %></th>
       <% end %>
       <th scope="col"></th>
     </tr>
@@ -27,12 +27,19 @@
       <tr>
         <td><%= check_box_tag 'select', item.id %></td>
         <% @show_page_attributes.each do |spa| %>
-          <td><%= item.try(spa) %></td>
+          <% case spa.to_s %>
+          <% when /names/ %>
+            <td><%= ::Admin::OrderData.new(order: item).all_names_string %></td>
+          <% else %>
+            <td><%= item.try(spa) %></td>
+          <% end %>
+
+
         <% end %>
         <td>
-          <%= link_to 'Show', item %>
-          <%= link_to 'Edit', admin.edit_order_path(item) %>
-          <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to t('.show'), item, class: "btn btn-sm btn-primary" %>
+          <%= link_to t('.edit'), admin.edit_order_path(item), class: "btn btn-sm btn-primary" %>
+          <%= link_to t('.destroy'), item, class: "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>

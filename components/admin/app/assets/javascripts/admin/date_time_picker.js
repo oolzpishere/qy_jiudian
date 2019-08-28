@@ -37,7 +37,7 @@ $(function () {
   });
 
   function setNight(startDate, endDate){
-    if ( startDate.length > 0 && endDate.length > 0 ) {
+    if ( startDate && endDate ) {
       $('#order_nights').attr( 'value', daysBetween(startDate, endDate) );
     }
   }

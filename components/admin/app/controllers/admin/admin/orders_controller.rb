@@ -8,8 +8,8 @@ module Admin
     before_action :set_order, only: [:show, :edit, :update, :destroy]
 
     # for nested resources
-    before_action :set_conference, only: [:index, :new, :create, :edit, :download]
-    before_action :set_hotel, only: [:index, :new, :create, :edit, :download]
+    before_action :set_conference, only: [:index, :new, :create, :edit, :download, :send_sms]
+    before_action :set_hotel, only: [:index, :new, :create, :edit, :download, :send_sms]
     before_action :set_room_types_array, only: [:index, :new, :create, :edit, :download]
     before_action :hotel_room_types, only: [:index, :new, :create, :edit]
 
@@ -39,6 +39,7 @@ module Admin
       @order = Product::Order.new(order_params)
 
       if @order.save
+        orders_send_sms([@order], 406860)
         # @order.rooms_attributes.save
         redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: 'Order was successfully created.')
       else
@@ -58,6 +59,7 @@ module Admin
     # DELETE /orders/1
     def destroy
       @order.destroy
+      orders_send_sms([@order], 406872)
       redirect_back(fallback_location: admin.admin_root_path,notice: 'Order was successfully destroyed.')
     end
 
@@ -75,6 +77,14 @@ module Admin
            # response.headers['Content-Disposition'] = 'attachment; filename="my_new_filename.xlsx"'
          }
       end
+    end
+
+    def send_sms
+      orders_string = params[:orders]
+      orders_array = JSON.parse(orders_string)
+      @orders = Product::Order.order(:id).find(orders_array)
+
+      order_send_sms(@orders, 406860)
     end
 
     private
@@ -164,6 +174,24 @@ module Admin
         #   nights: "Field::Number",
         #   total_price: "Field::Number",
         # }
+      end
+
+      def orders_send_sms(orders, template_code)
+        orders.each do |order|
+          order_data = ::Admin::OrderData.new(order: order)
+          phone_number = order.phone
+          params = [
+            order.conference.name,
+            order.hotel.name,
+            "#{order_data.check_in_out}#{order_data.nights}天",
+            order_data.all_names_string,
+            order_data.peoples_count,
+            order_data.room_type_zh + order_data.room_count_zh,
+            order_data.price_zh,
+            "#{order_data.breakfast}"
+          ]
+          Qcloud::Sms.single_sender(phone_number, template_code, params)
+        end
       end
 
   end

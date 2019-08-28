@@ -1,12 +1,13 @@
 module Admin
   class OrderData
     # attr_accessor :twin_beds, :queen_bed, :three_beds, :other_twin_beds
-    attr_reader :order, :i, :room
+    attr_reader :order, :i, :room, :room_type_translate
     def initialize(params)
       @order = params[:order]
       @i = params[:i]
       @room = params[:room]
       @room_types_array = ["twin_beds", "queen_bed", "three_beds","other_twin_beds"]
+      @room_type_translate = {"twin_beds" => "双人房","queen_bed" => "大床房", "three_beds" => "三人房","other_twin_beds" => "其它双人房" }
     end
 
     def send_command(command)
@@ -75,6 +76,37 @@ module Admin
       order.breakfast.to_i == 1 ? "含早" : "不含早"
     end
 
+    def all_names
+      names = []
+      order.rooms.each do |room|
+        names += room.names.split(',')
+      end
+      names
+    end
+
+    def all_names_string
+      all_names.join('、')
+    end
+
+    def peoples_count
+      "#{all_names.count}人"
+    end
+
+    def room_type_zh
+      room_type_translate[order.room_type]
+    end
+
+    def room_count_zh
+      "#{order.rooms.count}间"
+    end
+
+    def price
+      order.hotel.send(order.room_type + "_price")
+    end
+
+    def price_zh
+      "#{price}元/间/天"
+    end
 
   end
 end

@@ -57,13 +57,14 @@ $(document).on("ready page:load turbolinks:load", function() {
         url: '/admin/hotels/' + value + '.json',
         success: function(results) {
           hotel_hash = results;
+          // refresh hotel_hash first!
+          resetRoomTypeOptions();
+          resetAllHotelField();
         },
         error: function() {
         }
       })
-      // refresh hotel_hash first!
-      resetAllHotelField();
-      resetRoomTypeOptions();
+
     }
   });
 
@@ -97,8 +98,11 @@ $(document).on("ready page:load turbolinks:load", function() {
 
   function resetAllHotelField(){
     var price_db_name = room_type_selected + '_price';
-    var hotel_price = hotel_hash[price_db_name]
-    $('#order_price').val(hotel_price)
+    if (hotel_hash) {
+      var hotel_price = hotel_hash[price_db_name]
+      $('#order_price').val(hotel_price)
+    }
+
   }
 
   var room_types_array = ["twin_beds", "queen_bed", "three_beds","other_twin_beds"];
@@ -110,7 +114,7 @@ $(document).on("ready page:load turbolinks:load", function() {
     var existingRoomTypeArray = [];
     existingRoomTypeOptions = [];
     room_types_array.forEach(function(element) {
-      if (hotel_hash[element] > 0 ) {
+      if (hotel_hash && hotel_hash[element] > 0 ) {
         existingRoomTypeArray.push(element);
       }
     });

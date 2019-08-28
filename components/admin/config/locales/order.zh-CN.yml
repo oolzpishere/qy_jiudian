@@ -1,0 +1,37 @@
+zh-CN:
+  admin:
+    admin:
+      orders:
+        index:
+          new_order: 创建订单
+          show: 查看详情
+          edit: 编辑
+          destroy: 删除
+          group: 组数
+          names: 姓名
+        edit:
+          show: 查看详情
+          back: 返回
+        form:
+          group: 组数
+          id: 号码
+          conference: 会议
+          hotel: 酒店
+          names: 姓名
+          room_number: 房号
+          contact: 联系人
+          phone: 联系方式
+          twin_beds: 标间
+          queen_bed: 单间
+          three_beds: 三人间
+          other_twin_beds: 其他双人间
+          twin_beds_price: 标单/双现付价格/元/间/晚
+          queen_bed_price: 标单/双现付价格/元/间/晚
+          three_beds_price: 三人间现付价格/元/间/晚
+          other_twin_beds_price: 其他双间现付价格/元/间/晚
+          breakfast: 含早情况
+          price: 现付价格
+          checkin: 入住日期
+          checkout: 离店日期
+          check_in_out: 入住日期
+          nights: 天数（天）

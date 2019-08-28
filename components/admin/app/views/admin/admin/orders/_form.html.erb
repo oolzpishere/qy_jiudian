@@ -13,32 +13,31 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :group, class: "h6" %>
+    <%= form.label t(".group"), class: "h6" %>
     <%= form.text_field :group, class: "form-control", required: true %>
   </div>
 
   <div class="form-group">
-    <%= form.label :count, class: "h6" %>
-    <%= form.text_field :count, class: "form-control" %>
+    <%# form.label :count, class: "h6" %>
+    <%# form.text_field :count, class: "form-control" %>
   </div>
 
 
 
   <div class="form-group">
-    <%= form.label :conference, class: "h6" %>
-
+    <%= form.label t(".conference"), class: "h6" %>
     <% conference_option_hash = action_name.match(/new/) ? {selected: @conference.id} : {} %>
     <%= form.select(:conference_id, Product::Conference.all.collect {|item| [ item.name, item.id ] }, conference_option_hash,{id: "order_conference_selection", class: "", required: true})%>
   </div>
 
   <div class="form-group">
-    <%= form.label :hotel, class: "h6" %>
+    <%= form.label t(".hotel"), class: "h6" %>
 
     <%= form.select(:hotel_id, @conference.hotels.collect {|item| [ item.name, item.id ] }, {},{id: "order_hotel_selection", class: "", required: true})%>
   </div>
 
   <div class="form-group">
-    <%= form.label :room_type, class: "h6" %>
+    <%= form.label "房型", class: "h6" %>
     <%= form.select(:room_type, @room_type_options, {include_blank: true },{id: "room_type_selection", class: "", required: true})%>
   </div>
 
@@ -52,48 +51,48 @@
       <%= form.fields_for :rooms do |nest_form| %>
         <li  class="has_many_field_li">
           <% ["names", "room_number"].each do |name| %>
-            <%= nest_form.label name %>
+            <%= nest_form.label t("." + name) %>
             <%= nest_form.text_field name %>
           <% end %>
           <%= nest_form.check_box :_destroy%>
           </li>
       <% end %>
     </ul>
-    <a id="has-many-addmore" href="#">加入rooms</a>
+    <a id="has-many-addmore" href="#">加入房间</a>
   </div>
 
   <div class="form-group">
-    <%= form.label :contact, class: "h6" %>
+    <%= form.label t(".contact"), class: "h6" %>
     <%= form.text_field :contact, class: "form-control", required: true %>
   </div>
 
   <div class="form-group">
-    <%= form.label :phone, class: "h6" %>
+    <%= form.label t(".phone"), class: "h6" %>
     <%= form.text_field :phone, class: "form-control", required: true %>
   </div>
 
   <div class="form-group">
-    <%= form.label :price, class: "h6" %>
+    <%= form.label t(".price"), class: "h6" %>
     <%= form.text_field :price, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :breakfast, class: "h6" %>
+    <%= form.label t(".breakfast"), class: "h6" %>
     <%= form.text_field :breakfast, class: "form-control" %>
   </div>
 
   <div class="form-group position-relative">
-    <%= form.label :checkin, class: "h6" %>
+    <%= form.label t(".checkin"), class: "h6" %>
     <%= form.text_field :checkin, data: { type: 'datetime' }, class: "form-control", required: true %>
   </div>
 
   <div class="form-group position-relative">
-    <%= form.label :checkout, class: "h6" %>
+    <%= form.label t(".checkout"), class: "h6" %>
     <%= form.text_field :checkout, data: { type: 'datetime' }, class: "form-control", required: true %>
   </div>
 
   <div class="form-group">
-    <%= form.label :nights, class: "h6" %>
+    <%= form.label t(".nights"), class: "h6" %>
     <%= form.text_field :nights, class: "form-control" %>
   </div>
 

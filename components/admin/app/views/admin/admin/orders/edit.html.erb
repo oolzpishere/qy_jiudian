@@ -1,6 +1,6 @@
-<h1>Editing Order</h1>
+<h1>编辑订单</h1>
 
 <%= render 'form', order: @order %>
 
-<%= link_to 'Show', @order %> |
-<%= link_to 'Back', request.referer || admin.admin_root_path %>
+<%= link_to t(".show"), @order %> |
+<%= link_to t(".back"), request.referer || admin.admin_root_path %>

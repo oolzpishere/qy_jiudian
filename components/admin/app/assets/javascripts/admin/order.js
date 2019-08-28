@@ -2,17 +2,24 @@
 $(document).on("ready page:load turbolinks:load", function() {
   // #index
   if ($('#send_sms').length > 0) {
-    $('#send_sms').on('click',function(){
-      getAllChecked();
+    var conference_and_hotel = get_conference_and_hotel_by_path(),
+    conference_id = conference_and_hotel['conference'],
+    hotel_id = conference_and_hotel['hotel'];
 
+    $('#send_sms').on('click',function(){
+      var allChecked = getAllChecked();
+      var url = "/admin/orders/send_sms?conference_id=" + conference_id + "&hotel_id=" + hotel_id;
+      var request = $.ajax({
+        url: url,
+        method: "POST",
+        data: {orders: JSON.stringify(allChecked)},
+        dataType: "json"
+      });
     });
 
     $(document).on('click','#render_xlsx',function(e){
       e.preventDefault();
       var allChecked = getAllChecked(),
-        conference_and_hotel = get_conference_and_hotel_by_path(),
-        conference_id = conference_and_hotel['conference'],
-        hotel_id = conference_and_hotel['hotel'],
         url = "/admin/orders/download.xlsx?conference_id=" + conference_id + "&hotel_id=" + hotel_id;
 
       var $preparingFileModal = $("#preparing-file-modal");
