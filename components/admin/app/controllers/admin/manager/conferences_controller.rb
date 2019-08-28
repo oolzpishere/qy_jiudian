@@ -1,7 +1,7 @@
 require_dependency "admin/application_controller"
 
 module Admin
-  class Admin::ConferencesController < Admin::ApplicationController
+  class Manager::ConferencesController < Manager::ApplicationController
     before_action :set_conference, only: [:show, :edit, :update, :destroy]
     before_action :set_show_attributes , only: [:show]
 

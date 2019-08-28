@@ -1,7 +1,7 @@
 require_dependency "admin/application_controller"
 
 module Admin
-  class Admin::HotelsController < Admin::ApplicationController
+  class Manager::HotelsController < Manager::ApplicationController
     before_action :set_hotel, only: [:show, :edit, :update, :destroy]
 
     # for nested resources

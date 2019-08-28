@@ -1,7 +1,7 @@
 require_dependency "admin/application_controller"
 
 module Admin
-  class Admin::OrdersController < Admin::ApplicationController
+  class Manager::OrdersController < Manager::ApplicationController
     protect_from_forgery except: :download
     # skip_before_action :authenticate_admin!, :only => [:download]
 
