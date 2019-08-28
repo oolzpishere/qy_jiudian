@@ -3,6 +3,7 @@ require_dependency "admin/application_controller"
 module Admin
   class Admin::ConferencesController < Admin::ApplicationController
     before_action :set_conference, only: [:show, :edit, :update, :destroy]
+    before_action :set_show_attributes , only: [:show]
 
     # GET /conferences
     def index
@@ -67,6 +68,14 @@ module Admin
       # at most 4 columns
       def set_show_page_attributes
         @show_page_attributes = [
+          :name,
+          :sale_from,
+          :sale_to
+        ]
+      end
+
+      def set_show_attributes
+        @show_attributes = [
           :name,
           :sale_from,
           :sale_to
