@@ -12,11 +12,13 @@
 //
 //= require jquery
 //= require rails-ujs
+//= require jquery-ui
 //= require activestorage
 //= require moment
 //= require moment/zh-cn
 //= require datetime_picker
 //= require selectize
+//= require admin/jquery.fileDownload
 //= require admin/date_time_picker
 //= require admin/has_many
 //= require admin/order

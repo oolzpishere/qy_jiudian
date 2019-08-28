@@ -99,8 +99,6 @@ $(document).on("ready page:load turbolinks:load", function() {
     var price_db_name = room_type_selected + '_price';
     var hotel_price = hotel_hash[price_db_name]
     $('#order_price').val(hotel_price)
-
-
   }
 
   var room_types_array = ["twin_beds", "queen_bed", "three_beds","other_twin_beds"];

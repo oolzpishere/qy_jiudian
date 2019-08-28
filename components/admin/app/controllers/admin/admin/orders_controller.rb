@@ -2,12 +2,16 @@ require_dependency "admin/application_controller"
 
 module Admin
   class Admin::OrdersController < Admin::ApplicationController
+    protect_from_forgery except: :download
+    # skip_before_action :authenticate_admin!, :only => [:download]
+
     before_action :set_order, only: [:show, :edit, :update, :destroy]
 
     # for nested resources
     before_action :set_conference, only: [:index, :new, :create, :edit, :download]
     before_action :set_hotel, only: [:index, :new, :create, :edit, :download]
     before_action :set_room_types_array, only: [:index, :new, :create, :edit, :download]
+    before_action :hotel_room_types, only: [:index, :new, :create, :edit]
 
 
     # GET /orders
@@ -58,7 +62,13 @@ module Admin
     end
 
     def download
-      @orders = Product::Order.all
+      cookies['fileDownload'] = 'true'
+
+      # @orders = Product::Order.all
+      orders_string = params[:orders]
+      orders_array = JSON.parse(orders_string)
+      @orders = Product::Order.order(:id).find(orders_array)
+
       respond_to do |format|
          format.xlsx {
            render xlsx: 'download.xlsx.axlsx', layout: false, filename: "#{@conference.name}_#{@hotel.name}_#{Time.now}.xlsx"
@@ -93,10 +103,13 @@ module Admin
 
       def set_room_types_array
         @room_types_array = ["twin_beds", "queen_bed", "three_beds","other_twin_beds"]
-        room_type_translate = {"twin_beds" => "双人房","queen_bed" => "大床房", "three_beds" => "三人房","other_twin_beds" => "其它双人房" }
+        @room_type_translate = {"twin_beds" => "双人房","queen_bed" => "大床房", "three_beds" => "三人房","other_twin_beds" => "其它双人房" }
+      end
+
+      def hotel_room_types
         true_room_types_array = @room_types_array.select {|name| @hotel[name] && @hotel[name] > 0}
         @room_type_options = []
-        true_room_types_array.each {|name| @room_type_options << [room_type_translate[name], name ]}
+        true_room_types_array.each {|name| @room_type_options << [@room_type_translate[name], name ]}
       end
 
       # Use callbacks to share common setup or constraints between actions.

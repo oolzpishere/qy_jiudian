@@ -1,5 +1,7 @@
 require "admin/engine"
+require "sass-rails"
 require 'devise'
+require 'jquery-ui-rails'
 require 'bootstrap'
 require "momentjs-rails"
 require "datetime_picker_rails"

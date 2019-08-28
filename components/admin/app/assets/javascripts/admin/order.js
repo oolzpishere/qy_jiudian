@@ -7,11 +7,59 @@ $(document).on("ready page:load turbolinks:load", function() {
 
     });
 
+    $(document).on('click','#render_xlsx',function(e){
+      e.preventDefault();
+      var allChecked = getAllChecked(),
+        conference_and_hotel = get_conference_and_hotel_by_path(),
+        conference_id = conference_and_hotel['conference'],
+        hotel_id = conference_and_hotel['hotel'],
+        url = "/admin/orders/download.xlsx?conference_id=" + conference_id + "&hotel_id=" + hotel_id;
+
+      var $preparingFileModal = $("#preparing-file-modal");
+      $preparingFileModal.dialog({ modal: true });
+
+      $.fileDownload(url, {
+        httpMethod: "POST",
+        data: {orders: JSON.stringify(allChecked)},
+        successCallback: function (url) {
+            $preparingFileModal.dialog('close');
+        },
+        failCallback: function (responseHtml, url) {
+            $preparingFileModal.dialog('close');
+            $("#error-modal").dialog({ modal: true });
+        }
+      })
+
+      return false; //this is critical to stop the click event which will trigger a normal file download!
+
+      // .done(function () { alert('File download a success!'); })
+      // .fail(function () { alert('File download failed!'); });
+
+      // var request = $.ajax({
+      //   url: "/admin/orders/download.xlsx?conference_id=" + conference_id + "&hotel_id=" + hotel_id,
+      //   method: "POST",
+      //   data: JSON.stringify(sendInfo),
+      //   contentType: "application/json; charset=utf-8",
+      //   traditionnal: true,
+      //   // dataType: "json"
+      // });
+    });
+
+    function get_conference_and_hotel_by_path(){
+      var current_path = window.location.pathname,
+        regex = /conferences\/(\d)\/hotels\/(\d)/,
+        regex_result = regex.exec(window.location.pathname),
+        conference_id = regex_result[1],
+        hotel_id = regex_result[2]
+
+      return {conference: conference_id, hotel: hotel_id}
+    }
+
     function getAllChecked() {
       var selectedItems = [];
       $("input[name='select']").each(function(){
         if (this.checked) {
-          selectedItems.push(this);
+          selectedItems.push(this.value);
         }
       })
       return selectedItems;
@@ -25,6 +73,6 @@ $(document).on("ready page:load turbolinks:load", function() {
     $('#order_form').validate();
   }
 
-  
+
 
 });

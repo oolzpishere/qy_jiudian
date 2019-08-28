@@ -1,6 +1,8 @@
 Admin::Engine.routes.draw do
   scope path: "/admin", module: "admin" do
     get "/orders/download" => "orders#download"
+    post "/orders/download" => "orders#download"
+
 
     resources :conferences do
       resources :hotels, only: [:index, :new, :create] do
