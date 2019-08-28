@@ -1,6 +1,6 @@
 zh-CN:
   admin:
-    admin:
+    manager:
       hotels:
         index:
           new_hotel: 创建酒店

@@ -1,5 +1,5 @@
-<%= current_admin.email %>
-<%= link_to "退出登录", admin.destroy_admin_session_path, method: "delete", class: "ml-2 btn btn-sm btn-secondary"%>
+<%= current_manager.email %>
+<%= link_to "退出登录", admin.destroy_manager_session_path, method: "delete", class: "ml-2 btn btn-sm btn-secondary"%>
 
 <ul class="nav flex-column mt-3">
   <% @conferences.each do |conf| %>

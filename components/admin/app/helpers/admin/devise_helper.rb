@@ -6,14 +6,14 @@ module Admin
     end
 
     def login_type_admin?(path)
-      login_type(path) == "admin"
+      login_type(path) == "manager"
     end
 
     def login_type(path)
       case
       when path.match("/users/sign_in")
         return "user"
-      when path.match("/admins/sign_in")
+      when path.match("/managers/sign_in")
         return "admin"
       end
     end

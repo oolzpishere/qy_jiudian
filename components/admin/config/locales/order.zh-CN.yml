@@ -1,6 +1,6 @@
 zh-CN:
   admin:
-    admin:
+    manager:
       orders:
         index:
           new_order: 创建订单

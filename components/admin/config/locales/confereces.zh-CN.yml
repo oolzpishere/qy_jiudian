@@ -8,7 +8,7 @@ zh-CN:
         form:
           sale_from: 开始销售
           sale_to: 结束销售
-    admin:
+    manager:
       conferences:
         index:
           new_hotel: 创建酒店

@@ -1,5 +1,5 @@
 Admin::Engine.routes.draw do
-  scope path: "/admin", module: "admin" do
+  scope path: "/admin", module: "manager" do
     post "/orders/download" => "orders#download"
     post "/orders/send_sms" => "orders#send_sms"
 
@@ -28,7 +28,7 @@ Admin::Engine.routes.draw do
 
 
   devise_for :users,  module: 'devise', class_name: "Account::User"
-  devise_for :admins, module: 'devise', class_name: "Account::Admin"
+  devise_for :managers, module: 'devise', class_name: "Account::Admin"
 
   get "/auth/wechat/callback" => "authentications#wechat"
 

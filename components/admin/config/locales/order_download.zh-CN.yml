@@ -1,6 +1,6 @@
 zh-CN:
   admin:
-    admin:
+    manager:
       orders:
         download:
           xlsx:
