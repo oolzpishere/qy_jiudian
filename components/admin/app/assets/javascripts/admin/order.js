@@ -32,17 +32,19 @@ $(document).on("ready page:load turbolinks:load", function() {
 
       return false; //this is critical to stop the click event which will trigger a normal file download!
 
-      // .done(function () { alert('File download a success!'); })
-      // .fail(function () { alert('File download failed!'); });
+    });
 
-      // var request = $.ajax({
-      //   url: "/admin/orders/download.xlsx?conference_id=" + conference_id + "&hotel_id=" + hotel_id,
-      //   method: "POST",
-      //   data: JSON.stringify(sendInfo),
-      //   contentType: "application/json; charset=utf-8",
-      //   traditionnal: true,
-      //   // dataType: "json"
-      // });
+    // select_all logic
+    $('#select_all').on('click',function(){
+      if (this.checked) {
+        $("input[name='select']").each(function(){
+          this.checked = true;
+        });
+      } else {
+        $("input[name='select']").each(function(){
+          this.checked = false;
+        });
+      }
     });
 
     function get_conference_and_hotel_by_path(){
