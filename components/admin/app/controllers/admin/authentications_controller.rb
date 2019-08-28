@@ -17,7 +17,7 @@ module Admin
       else
         i = Devise.friendly_token[0,20]
         user = User.create!(
-          username: data.nickname.to_s
+          username: data.nickname.to_s,
           # username: data.nickname.to_s + "_" + rand(36 ** 3).to_s(36),
           email:  "#{i}@sflx.com.cn",       # 因为devise 的缘故,邮箱暂做成随机
           avatar: data.headimgurl,
