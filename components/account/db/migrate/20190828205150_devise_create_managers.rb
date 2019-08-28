@@ -36,8 +36,8 @@ class DeviseCreateManagers < ActiveRecord::Migration[5.2]
       t.timestamps null: false
     end
 
-    add_index :account_managers, :email,                unique: true
-    add_index :account_managers, :reset_password_token, unique: true
+    add_index :managers, :email,                unique: true
+    add_index :managers, :reset_password_token, unique: true
     # add_index :account_managers, :confirmation_token,   unique: true
     # add_index :account_managers, :unlock_token,         unique: true
   end
