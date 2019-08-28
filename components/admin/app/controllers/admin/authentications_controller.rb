@@ -3,7 +3,7 @@ require_dependency "admin/application_controller"
 module Admin
   class AuthenticationsController < ApplicationController
     # skip_before_action :verify_authenticity_token, :authenticate_user!
-    skip_before_action :authenticate_manager!
+    skip_before_action :authenticate_manager!, raise: false
     def wechat
       auth = request.env['omniauth.auth']       # 引入回调数据 HASH
       data = auth.info                          # https://github.com/skinnyworm/omniauth-wechat-oauth2
