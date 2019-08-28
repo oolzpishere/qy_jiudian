@@ -28,7 +28,7 @@ Admin::Engine.routes.draw do
 
 
   devise_for :users,  module: 'devise', class_name: "Account::User"
-  devise_for :managers, module: 'devise', class_name: "Account::Admin"
+  devise_for :managers, module: 'devise', class_name: "Account::Manager"
 
   get "/auth/wechat/callback" => "authentications#wechat"
 
