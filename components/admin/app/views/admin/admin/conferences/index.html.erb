@@ -5,7 +5,7 @@
   </div>
   <div class="col-auto">
     <span>
-      <%= link_to 'New Conferences', new_conference_path, class: "btn btn-success my-auto" %>
+      <%= link_to '新建会议', new_conference_path, class: "btn btn-success my-auto" %>
     </span>
   </div>
 </div>
@@ -14,7 +14,7 @@
   <thead>
     <tr>
       <% @show_page_attributes.each do |spa| %>
-        <th scope="col"><%= spa.to_s %></th>
+        <th scope="col"><%= t(".#{spa.to_s}") %></th>
       <% end %>
       <th scope="col"></th>
     </tr>
@@ -27,9 +27,9 @@
           <td><%= item.try(spa) %></td>
         <% end %>
         <td>
-          <%= link_to 'Show', item %>
-          <%= link_to 'Edit', edit_conference_path(item) %>
-          <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to t('.show'), item, class: "btn btn-sm btn-primary" %>
+          <%= link_to t('.edit'), edit_conference_path(item), class: "btn btn-sm btn-primary" %>
+          <%= link_to t('.destroy'), item, class: "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>

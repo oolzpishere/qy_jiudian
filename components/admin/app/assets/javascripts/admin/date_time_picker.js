@@ -5,11 +5,11 @@ $(function () {
   });
   $('#conference_sale_from').datetimepicker({
     debug: false,
-    format: "YYYY-MM-DD HH:mm:ss",
+    format: "YYYY-MM-DD",
   });
   $('#conference_sale_to').datetimepicker({
     debug: false,
-    format: "YYYY-MM-DD HH:mm:ss",
+    format: "YYYY-MM-DD",
   });
 
 
