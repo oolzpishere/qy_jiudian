@@ -1,5 +1,5 @@
 Admin::Engine.routes.draw do
-  scope path: "/admin", module: "manager" do
+  scope path: "/manager", module: "manager" do
     post "/orders/download" => "orders#download"
     post "/orders/send_sms" => "orders#send_sms"
 
