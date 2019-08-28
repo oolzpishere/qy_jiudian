@@ -152,10 +152,7 @@ module Admin
       # copy from permit.
       # at most 4 columns
       def set_show_page_attributes
-        @show_page_attributes = [
-          :group,
-          :names,
-        ]
+        @show_page_attributes = [:group, :names, :contact, :phone]
       end
 
       def set_show_attributes

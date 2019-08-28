@@ -9,6 +9,8 @@ zh-CN:
           destroy: 删除
           group: 组数
           names: 姓名
+          contact: 联系人
+          phone: 联系方式
         edit:
           show: 查看详情
           back: 返回
