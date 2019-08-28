@@ -18,6 +18,14 @@ module Admin
       end
     end
 
+    def conference_name
+      order.conference.name
+    end
+
+    def hotel_name
+      order.hotel.name
+    end
+
     def id
       i + 1
     end

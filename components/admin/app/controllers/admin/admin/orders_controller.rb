@@ -12,7 +12,7 @@ module Admin
     before_action :set_hotel, only: [:index, :new, :create, :edit, :download, :send_sms]
     before_action :set_room_types_array, only: [:index, :new, :create, :edit, :download]
     before_action :hotel_room_types, only: [:index, :new, :create, :edit]
-
+    before_action :set_show_attributes, only: [:show]
 
     # GET /orders
     def index
@@ -156,6 +156,10 @@ module Admin
           :group,
           :names,
         ]
+      end
+
+      def set_show_attributes
+        @show_attributes = [ :group, :conference_name, :hotel_name, :room_type_zh, :room_count_zh, :all_names_string, :contact, :phone, :price, :breakfast, :checkin, :checkout, :nights]
       end
 
       def set_attribute_types
