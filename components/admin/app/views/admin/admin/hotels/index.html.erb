@@ -5,7 +5,7 @@
   </div>
   <div class="col-auto">
     <span>
-      <%= link_to 'New Conferences', admin.new_conference_hotel_path, class: "btn btn-success my-auto" %>
+      <%= link_to t('.new_hotel'), admin.new_conference_hotel_path, class: "btn btn-success my-auto" %>
     </span>
   </div>
 </div>
@@ -14,7 +14,7 @@
   <thead>
     <tr>
       <% @show_page_attributes.each do |spa| %>
-        <th scope="col"><%= spa.to_s %></th>
+        <th scope="col"><%= t(".#{spa.to_s}") %></th>
       <% end %>
       <th scope="col"></th>
     </tr>
@@ -27,9 +27,9 @@
           <td><%= link_to item.try(spa), admin.conference_hotel_orders_path(@conference, item) %></td>
         <% end %>
         <td>
-          <%= link_to 'Show', admin.hotel_path(item) %>
-          <%= link_to 'Edit', admin.edit_hotel_path(item) %>
-          <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to t('.show'), admin.hotel_path(item), class: "btn btn-sm btn-primary" %>
+          <%= link_to t('.edit'), admin.edit_hotel_path(item), class: "btn btn-sm btn-primary" %>
+          <%= link_to t('.destroy'), item, class: "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>

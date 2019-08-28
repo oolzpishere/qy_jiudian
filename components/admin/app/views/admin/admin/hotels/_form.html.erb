@@ -12,57 +12,57 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :name, class: "h6" %>
+    <%= form.label t('.name'), class: "h6" %>
     <%= form.text_field :name, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :conferences, class: "h6" %>
+    <%= form.label t('.conferences'), class: "h6" %>
     <%= form.select(:conference_ids, Product::Conference.all.collect {|item| [ item.name, item.id ] },{},{:multiple => true, id: "hotel_conference_selection", class: ""})%>
   </div>
 
   <div class="form-group">
-    <%= form.label :twin_beds, class: "h6" %>
+    <%= form.label t('.twin_beds'), class: "h6" %>
     <%= form.text_field :twin_beds, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :twin_beds_price, class: "h6" %>
+    <%= form.label t('.twin_beds_price'), class: "h6" %>
     <%= form.text_field :twin_beds_price, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :queen_bed, class: "h6" %>
+    <%= form.label t('.queen_bed'), class: "h6" %>
     <%= form.text_field :queen_bed, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :queen_bed_price, class: "h6" %>
+    <%= form.label t('.queen_bed_price'), class: "h6" %>
     <%= form.text_field :queen_bed_price, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :three_beds, class: "h6" %>
+    <%= form.label t('.three_beds'), class: "h6" %>
     <%= form.text_field :three_beds, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :three_beds_price, class: "h6" %>
+    <%= form.label t('.three_beds_price'), class: "h6" %>
     <%= form.text_field :three_beds_price, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :other_twin_beds, class: "h6" %>
+    <%= form.label t('.other_twin_beds'), class: "h6" %>
     <%= form.text_field :other_twin_beds, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :other_twin_beds_price, class: "h6" %>
+    <%= form.label t('.other_twin_beds_price'), class: "h6" %>
     <%= form.text_field :other_twin_beds_price, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :breakfast, class: "h6" %>
+    <%= form.label t('.breakfast'), class: "h6" %>
     <%= form.text_field :breakfast, class: "form-control" %>
   </div>
 

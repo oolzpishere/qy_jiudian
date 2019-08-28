@@ -6,6 +6,7 @@ module Admin
 
     # for nested resources
     before_action :set_conference, only: [:index, :new, :create]
+    before_action :set_show_attributes, only: [:show]
 
     # GET /admin/hotels
     def index
@@ -94,6 +95,10 @@ module Admin
           :id,
           :name,
         ]
+      end
+
+      def set_show_attributes
+        @show_attributes = [:id, :name, :twin_beds, :twin_beds_price, :queen_bed, :queen_bed_price, :three_beds, :three_beds_price, :other_twin_beds, :other_twin_beds_price, :breakfast, :conferences]
       end
 
       def set_attribute_types
