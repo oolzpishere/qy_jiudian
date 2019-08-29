@@ -87,7 +87,7 @@ module Admin
     def all_names
       names = []
       order.rooms.each do |room|
-        names += room.names.split(',')
+        names += room.names.split(/,|、|，/)
       end
       names
     end

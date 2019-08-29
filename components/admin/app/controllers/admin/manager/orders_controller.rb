@@ -16,7 +16,7 @@ module Admin
 
     # GET /orders
     def index
-      @orders = Product::Order.all
+      @orders = Product::Order.where(conference: @conference, hotel: @hotel)
     end
 
     # GET /orders/1
