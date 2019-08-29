@@ -73,7 +73,13 @@ module Admin
     def check_in_out
       checkin = order.checkin
       checkout = order.checkout
-      "#{checkin.month}月#{checkin.day}-#{checkout.day}日"
+      "#{checkin.month}月#{checkin.day}日-#{checkout.month}月#{checkout.day}日"
+    end
+
+    def conference_check_in_out
+      checkin = order.conference.sale_from
+      checkout = order.conference.sale_to
+      "#{checkin.month}月#{checkin.day}日-#{checkout.month}月#{checkout.day}日"
     end
 
     def nights

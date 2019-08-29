@@ -6,7 +6,7 @@ zh-CN:
           xlsx:
             axlsx:
               group: 组数
-              id: 号码
+              id: 序号
               names: 姓名
               contact: 联系人
               phone: 联系方式
