@@ -84,7 +84,7 @@ module Admin
       orders_array = JSON.parse(orders_string)
       @orders = Product::Order.order(:id).find(orders_array)
 
-      order_send_sms(@orders, 406860)
+      orders_send_sms(@orders, 406860)
     end
 
     private
