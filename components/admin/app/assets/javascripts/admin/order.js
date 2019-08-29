@@ -8,7 +8,7 @@ $(document).on("ready page:load turbolinks:load", function() {
 
     $('#send_sms').on('click',function(){
       var allChecked = getAllChecked();
-      var url = "/admin/orders/send_sms?conference_id=" + conference_id + "&hotel_id=" + hotel_id;
+      var url = "/manager/orders/send_sms?conference_id=" + conference_id + "&hotel_id=" + hotel_id;
       var request = $.ajax({
         url: url,
         method: "POST",
@@ -20,7 +20,7 @@ $(document).on("ready page:load turbolinks:load", function() {
     $(document).on('click','#render_xlsx',function(e){
       e.preventDefault();
       var allChecked = getAllChecked(),
-        url = "/admin/orders/download.xlsx?conference_id=" + conference_id + "&hotel_id=" + hotel_id;
+        url = "/manager/orders/download.xlsx?conference_id=" + conference_id + "&hotel_id=" + hotel_id;
 
       var $preparingFileModal = $("#preparing-file-modal");
       $preparingFileModal.dialog({ modal: true });

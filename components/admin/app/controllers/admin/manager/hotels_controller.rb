@@ -8,7 +8,7 @@ module Admin
     before_action :set_conference, only: [:index, :new, :create]
     before_action :set_show_attributes, only: [:show]
 
-    # GET /admin/hotels
+    # GET /manager/hotels
     def index
       @hotels = @conference.hotels
       respond_to do |format|
@@ -17,7 +17,7 @@ module Admin
       end
     end
 
-    # GET /admin/hotels/1
+    # GET /manager/hotels/1
     def show
       respond_to do |format|
         format.html {}
@@ -25,17 +25,17 @@ module Admin
       end
     end
 
-    # GET /admin/hotels/new
+    # GET /manager/hotels/new
     def new
       @hotel = Product::Hotel.new
       1.times { @hotel.conferences.build }
     end
 
-    # GET /admin/hotels/1/edit
+    # GET /manager/hotels/1/edit
     def edit
     end
 
-    # POST /admin/hotels
+    # POST /manager/hotels
     def create
       @hotel = Product::Hotel.new(hotel_params)
 
@@ -46,7 +46,7 @@ module Admin
       end
     end
 
-    # PATCH/PUT /admin/hotels/1
+    # PATCH/PUT /manager/hotels/1
     def update
       if @hotel.update(hotel_params)
         redirect_back_or_default(admin.admin_root_path, notice: 'Hotel was successfully updated.')
@@ -55,7 +55,7 @@ module Admin
       end
     end
 
-    # DELETE /admin/hotels/1
+    # DELETE /manager/hotels/1
     def destroy
       @hotel.destroy
       redirect_back(fallback_location: admin.admin_root_path,notice: 'Hotel was successfully destroyed.')

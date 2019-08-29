@@ -19,7 +19,7 @@ $(document).on("ready page:load turbolinks:load", function() {
       order_hotel_selection.load(function(callback) {
         xhr && xhr.abort();
         xhr = $.ajax({
-            url: '/admin/conferences/' + value + '/hotels.json',
+            url: '/manager/conferences/' + value + '/hotels.json',
             success: function(results) {
                 order_hotel_selection.enable();
                 callback(results);
@@ -41,7 +41,7 @@ $(document).on("ready page:load turbolinks:load", function() {
       if (this.items.length) {
         var init_hotel_id = this.items[0];
         $.ajax({
-          url: '/admin/hotels/' + init_hotel_id + '.json',
+          url: '/manager/hotels/' + init_hotel_id + '.json',
           success: function(results) {
             hotel_hash = results;
           },
@@ -54,7 +54,7 @@ $(document).on("ready page:load turbolinks:load", function() {
     onChange: function(value) {
       if (!value.length) return;
       $.ajax({
-        url: '/admin/hotels/' + value + '.json',
+        url: '/manager/hotels/' + value + '.json',
         success: function(results) {
           hotel_hash = results;
           // refresh hotel_hash first!

@@ -47,7 +47,7 @@
 </table>
 
 <button type="button" class="btn btn-success" id="send_sms">发送短信</button>
-<%= link_to '导出报表', "/admin/orders/download.xlsx?conference_id=#{@conference.id}&hotel_id=#{@hotel.id}", class: "btn btn-primary", id: "render_xlsx" %>
+<%= link_to '导出报表', "/manager/orders/download.xlsx?conference_id=#{@conference.id}&hotel_id=#{@hotel.id}", class: "btn btn-primary", id: "render_xlsx" %>
 
 
 <div id="preparing-file-modal" title="Preparing report..." style="display: none;">
