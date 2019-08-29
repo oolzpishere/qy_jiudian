@@ -122,5 +122,10 @@ module Admin
       "#{price}元/间/天"
     end
 
+    def total_price
+      # 单价 * 天数
+      price * nights
+    end
+
   end
 end

@@ -1,4 +1,4 @@
-columns = %w(group id names contact phone twin_beds queen_bed three_beds other_twin_beds twin_beds_price queen_bed_price three_beds_price other_twin_beds_price breakfast room_number check_in_out nights )
+columns = %w(group id names contact phone twin_beds queen_bed three_beds other_twin_beds twin_beds_price queen_bed_price three_beds_price other_twin_beds_price breakfast room_number check_in_out nights total_price )
 
 columns_zh = columns.map {|name| t('.' + name)}
 
@@ -35,7 +35,7 @@ xlsx_package.workbook do |wb|
 
     title_merge_end = ('A'..'Z').to_a[(columns.length - 1)]
     sheet.merge_cells "A1:#{title_merge_end}1"
-    
+
     sheet.column_widths 6, 6, nil
 
   end

@@ -22,3 +22,4 @@ zh-CN:
               room_number: 房号
               check_in_out: 入住日期
               nights: 天数（天）
+              total_price: 房费小计
