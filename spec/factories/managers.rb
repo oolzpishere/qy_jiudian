@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :admin, class: "Account::Admin" do
+  factory :manager, class: "Account::Manager" do
     id { 1 }
     email { Faker::Internet.email }
     password { "password"}
