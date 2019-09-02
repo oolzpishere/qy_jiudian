@@ -68,7 +68,6 @@ RSpec.describe Admin::Manager::HotelsController, type: :controller do
           expect(hotel_org).to_not eq(hotel)
         end
       end
-
     end
 
     describe "DELETE #destroy" do
