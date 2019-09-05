@@ -90,6 +90,10 @@ module Admin
       order.breakfast.to_i == 1 ? "含早" : "不含早"
     end
 
+    def breakfast_boolean
+      order.breakfast.to_i == 1 ? "含" : "不含"
+    end
+
     def all_names
       names = []
       order.rooms.each do |room|

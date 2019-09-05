@@ -9,6 +9,7 @@ require 'omniauth'
 require "omniauth-wechat-oauth2"
 require "selectize-rails"
 require 'qcloud/sms'
+require 'aliyun/sms'
 # require 'axlsx'
 # require 'rubyzip'
 require 'axlsx_rails'
@@ -16,6 +17,7 @@ require 'axlsx_rails'
 require 'jquery-validation-rails'
 
 require 'admin/order_data'
+require 'admin/send_sms'
 
 
 module Admin

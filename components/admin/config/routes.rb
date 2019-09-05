@@ -32,5 +32,6 @@ Admin::Engine.routes.draw do
 
   get "/auth/wechat/callback" => "authentications#wechat"
 
+  root to: "conferences#index"
   # get "/auth/:action/callback", :controller => "authentications", :constraints => { :action => /wechat|google/ }
 end

@@ -83,8 +83,8 @@ module Admin
       orders_string = params[:orders]
       orders_array = JSON.parse(orders_string)
       @orders = Product::Order.order(:id).find(orders_array)
-
-      orders_send_sms(@orders, 406860)
+      # new template SMS_173477615
+      ::Admin::SendSms::Ali.new(@orders, "SMS_173476089").send_sms
     end
 
     private
@@ -177,23 +177,6 @@ module Admin
         # }
       end
 
-      def orders_send_sms(orders, template_code)
-        orders.each do |order|
-          order_data = ::Admin::OrderData.new(order: order)
-          phone_number = order.phone
-          params = [
-            order.conference.name,
-            order.hotel.name,
-            "#{order_data.check_in_out}#{order_data.nights}天",
-            order_data.all_names_string,
-            order_data.peoples_count,
-            order_data.room_type_zh + order_data.room_count_zh,
-            order_data.price_zh,
-            "#{order_data.breakfast}"
-          ]
-          Qcloud::Sms.single_sender(phone_number, template_code, params)
-        end
-      end
 
   end
 end
