@@ -32,6 +32,11 @@
   </div>
 
   <div class="form-group">
+    <%= form.label t('.twin_beds_settlement_price'), class: "h6" %>
+    <%= form.text_field :twin_beds_settlement_price, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <%= form.label t('.queen_bed'), class: "h6" %>
     <%= form.text_field :queen_bed, class: "form-control" %>
   </div>
@@ -39,6 +44,11 @@
   <div class="form-group">
     <%= form.label t('.queen_bed_price'), class: "h6" %>
     <%= form.text_field :queen_bed_price, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label t('.queen_bed_settlement_price'), class: "h6" %>
+    <%= form.text_field :queen_bed_settlement_price, class: "form-control" %>
   </div>
 
   <div class="form-group">
@@ -52,6 +62,11 @@
   </div>
 
   <div class="form-group">
+    <%= form.label t('.three_beds_settlement_price'), class: "h6" %>
+    <%= form.text_field :three_beds_settlement_price, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <%= form.label t('.other_twin_beds'), class: "h6" %>
     <%= form.text_field :other_twin_beds, class: "form-control" %>
   </div>
@@ -59,6 +74,11 @@
   <div class="form-group">
     <%= form.label t('.other_twin_beds_price'), class: "h6" %>
     <%= form.text_field :other_twin_beds_price, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label t('.other_twin_beds_settlement_price'), class: "h6" %>
+    <%= form.text_field :other_twin_beds_settlement_price, class: "form-control" %>
   </div>
 
   <div class="form-group">
@@ -70,7 +90,7 @@
   <div class="form-group">
     <%= form.label t('.car'), class: "h6" %>
     <%# form.text_field :breakfast, class: "form-control" %>
-    <%= form.select(:car, [["不含用车", 0],["含用车", 1]], {selected: 0},{ id: "car_selection", class: "", required: true})%>
+    <%= form.select(:car, [["不含用车", 0],["含用车", 1]], {},{ id: "car_selection", class: "", required: true})%>
   </div>
 
   <div class="actions">

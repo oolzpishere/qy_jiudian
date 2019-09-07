@@ -1,4 +1,4 @@
-columns = %w(group id names contact phone twin_beds queen_bed three_beds other_twin_beds twin_beds_price queen_bed_price three_beds_price other_twin_beds_price breakfast room_number check_in_out nights total_price )
+columns = %w(group id names contact phone twin_beds queen_bed three_beds other_twin_beds twin_beds_price queen_bed_price three_beds_price other_twin_beds_price breakfast room_number check_in_out nights total_price twin_beds_settlement_price queen_bed_settlement_price three_beds_settlement_price other_twin_beds_settlement_price )
 
 columns_zh = columns.map {|name| t('.' + name)}
 

@@ -18,6 +18,10 @@ zh-CN:
               queen_bed_price: 标单/双现付价格/元/间/晚
               three_beds_price: 三人间现付价格/元/间/晚
               other_twin_beds_price: 其他双间现付价格/元/间/晚
+              twin_beds_settlement_price: 标单/双结算价格/元/间/晚
+              queen_bed_settlement_price: 标单/双结算价格/元/间/晚
+              three_beds_settlement_price: 三人间结算价格/元/间/晚
+              other_twin_beds_settlement_price: 其他双间结算价格/元/间/晚
               breakfast: 含早情况
               room_number: 房号
               check_in_out: 入住日期

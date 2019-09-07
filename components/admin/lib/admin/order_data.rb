@@ -70,6 +70,22 @@ module Admin
       order.room_type.match(/other_twin_beds/) ? order.hotel.other_twin_beds_price : ""
     end
 
+    def twin_beds_settlement_price
+      order.room_type.match(/twin_beds/) ? order.hotel.twin_beds_settlement_price : ""
+    end
+
+    def queen_bed_settlement_price
+      order.room_type.match(/queen_bed/) ? order.hotel.queen_bed_settlement_price : ""
+    end
+
+    def three_beds_settlement_price
+      order.room_type.match(/three_beds/) ? order.hotel.three_beds_settlement_price : ""
+    end
+
+    def other_twin_beds_settlement_price
+      order.room_type.match(/other_twin_beds/) ? order.hotel.other_twin_beds_settlement_price : ""
+    end
+
     def check_in_out
       checkin = order.checkin
       checkout = order.checkout
@@ -134,6 +150,8 @@ module Admin
     def car
       order.hotel.car == 0 ? "不含用车" : "含用车"
     end
+
+
 
   end
 end
