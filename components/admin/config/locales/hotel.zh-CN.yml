@@ -28,6 +28,7 @@ zh-CN:
           three_beds_price: 三人间现付价格/元/间/晚
           other_twin_beds_price: 其他双间现付价格/元/间/晚
           breakfast: 含早情况
+          car: 用车情况
           price: 现付价格
           checkin: 入住日期
           checkout: 离店日期
@@ -49,6 +50,7 @@ zh-CN:
             three_beds_price: 三人间现付价格/元/间/晚
             other_twin_beds_price: 其他双间现付价格/元/间/晚
             breakfast: 含早情况
+            car: 用车情况
             price: 现付价格
             checkin: 入住日期
             checkout: 离店日期

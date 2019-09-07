@@ -131,5 +131,9 @@ module Admin
       price * nights
     end
 
+    def car
+      order.hotel.car == 0 ? "不含用车" : "含用车"
+    end
+
   end
 end

@@ -16,8 +16,10 @@
           <% case item.to_s %>
           <% when /breakfast/ %>
             <%= @hotel.breakfast == 0 ? "不含早" : "含早" %>
+          <% when /car/ %>
+            <%= @hotel.car == 0 ? "不含用车" : "含用车" %>
           <% when /conferences/ %>
-            <%= @hotel.conferences.map {|c| c.name}.join(",") %>
+            <%= @hotel.conferences.map {|c| c.name}.join(", ") %>
           <% else %>
             <%= @hotel.try(item) %>
           <% end %>

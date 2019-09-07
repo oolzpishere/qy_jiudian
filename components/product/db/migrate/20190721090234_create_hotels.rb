@@ -11,6 +11,7 @@ class CreateHotels < ActiveRecord::Migration[5.2]
       t.integer :three_beds_price
       t.integer :other_twin_beds_price
       t.integer :breakfast, default: 0
+      t.integer :car, default: 0
 
       t.timestamps
     end

@@ -39,7 +39,7 @@ module Admin
       @order = Product::Order.new(order_params)
 
       if @order.save
-        orders_send_sms([@order], 406860)
+        ::Admin::SendSms::Ali.new([@order], "SMS_173477615").send_sms
         # @order.rooms_attributes.save
         redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: 'Order was successfully created.')
       else
@@ -59,7 +59,7 @@ module Admin
     # DELETE /orders/1
     def destroy
       @order.destroy
-      orders_send_sms([@order], 406872)
+      # orders_send_sms([@order], 406872)
       redirect_back(fallback_location: admin.admin_root_path,notice: 'Order was successfully destroyed.')
     end
 
@@ -83,8 +83,7 @@ module Admin
       orders_string = params[:orders]
       orders_array = JSON.parse(orders_string)
       @orders = Product::Order.order(:id).find(orders_array)
-      # new template SMS_173477615
-      ::Admin::SendSms::Ali.new(@orders, "SMS_173476089").send_sms
+      ::Admin::SendSms::Ali.new(@orders, "SMS_173477615").send_sms
     end
 
     private
@@ -156,7 +155,7 @@ module Admin
       end
 
       def set_show_attributes
-        @show_attributes = [ :group, :conference_name, :hotel_name, :room_type_zh, :room_count_zh, :all_names_string, :contact, :phone, :price, :breakfast, :checkin, :checkout, :nights]
+        @show_attributes = [ :group, :conference_name, :hotel_name, :room_type_zh, :room_count_zh, :all_names_string, :contact, :phone, :price, :breakfast, :car, :checkin, :checkout, :nights]
       end
 
       def set_attribute_types

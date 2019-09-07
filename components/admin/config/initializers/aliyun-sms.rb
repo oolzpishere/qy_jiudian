@@ -1,6 +1,6 @@
 Aliyun::Sms.configure do |config|
-  config.access_key_secret = ENV["QY_ALI_ACCESS_KEY_SECRET"]
   config.access_key_id = ENV["QY_ALI_ACCESS_KEY_ID"]
+  config.access_key_secret = ENV["QY_ALI_ACCESS_KEY_SECRET"]
   config.action = 'SendSms'                       # default value
   config.format = 'JSON'                           # http return format, value is 'JSON' or 'XML'
   config.region_id = 'cn-hangzhou'                # default value

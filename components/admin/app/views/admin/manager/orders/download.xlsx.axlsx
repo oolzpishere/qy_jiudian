@@ -17,7 +17,6 @@ xlsx_package.workbook do |wb|
     sheet.add_row ["前沿课堂#{@conference.name + @hotel.name + first_order_data.send_command("room_type_zh") + first_order_data.send_command("conference_check_in_out") }"], :style => head
 
 
-
     sheet.add_row columns_zh, :style => title
     @orders.each_with_index do |order, i|
       order.rooms.each do |room|

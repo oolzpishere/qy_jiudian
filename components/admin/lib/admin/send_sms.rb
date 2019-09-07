@@ -25,7 +25,7 @@ module Admin
         order_data = ::Admin::OrderData.new(order: record)
         {"conference" => record.conference.name,
           "hotel" => record.hotel.name,
-          "days" => "#{order_data.check_in_out}#{order_data.nights}天",
+          "period" => "#{order_data.check_in_out}#{order_data.nights}天",
           "names" => order_data.all_names_string,
           "total_people" => order_data.peoples_count,
           "rooms" => order_data.room_type_zh + order_data.room_count_zh,
