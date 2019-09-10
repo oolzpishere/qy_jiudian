@@ -93,6 +93,11 @@
     <%= form.select(:car, [["不含用车", 0],["含用车", 1]], {},{ id: "car_selection", class: "", required: true})%>
   </div>
 
+  <div class="form-group">
+    <%= form.label t('.tax_rate'), class: "h6" %>
+    <%= form.text_field :tax_rate, class: "form-control" %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

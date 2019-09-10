@@ -38,6 +38,7 @@ zh-CN:
           checkout: 离店日期
           check_in_out: 入住日期
           nights: 天数（天）
+          tax_rate: 税率
         show:
             name: 酒店名称
             id: 序号
@@ -64,3 +65,4 @@ zh-CN:
             checkout: 离店日期
             check_in_out: 入住日期
             nights: 天数（天）
+            tax_rate: 税率

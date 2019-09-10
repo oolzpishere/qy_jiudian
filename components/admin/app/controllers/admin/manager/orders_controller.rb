@@ -39,7 +39,7 @@ module Admin
       @order = Product::Order.new(order_params)
 
       if @order.save
-        ::Admin::SendSms::Ali.new([@order], "SMS_173477615").send_sms
+        ::Admin::SendSms::Ali.new(@order, "order").send_sms
         # @order.rooms_attributes.save
         redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: 'Order was successfully created.')
       else
@@ -59,7 +59,7 @@ module Admin
     # DELETE /orders/1
     def destroy
       @order.destroy
-      # orders_send_sms([@order], 406872)
+      ::Admin::SendSms::Ali.new(@order, "cancel").send_sms
       redirect_back(fallback_location: admin.admin_root_path,notice: 'Order was successfully destroyed.')
     end
 
@@ -83,7 +83,9 @@ module Admin
       orders_string = params[:orders]
       orders_array = JSON.parse(orders_string)
       @orders = Product::Order.order(:id).find(orders_array)
-      ::Admin::SendSms::Ali.new(@orders, "SMS_173477615").send_sms
+
+      @orders.each {|order| ::Admin::SendSms::Ali.new(order, "order").send_sms }
+      # ::Admin::SendSms::Ali.new(@orders, "SMS_173472652").send_sms
     end
 
     private

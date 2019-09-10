@@ -10,13 +10,13 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.string :contact
       t.string :phone
       # t.integer :room
-      t.integer :price
+      t.decimal :price
       t.integer :breakfast
       # t.integer :room_number
       t.date :checkin
       t.date :checkout
       t.integer :nights
-      t.integer :total_price
+      t.decimal :total_price
 
       t.timestamps
     end

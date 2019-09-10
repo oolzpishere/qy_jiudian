@@ -3,6 +3,14 @@ $(function () {
     debug: false,
     format: "HH:mm:ss",
   });
+  $('#conference_start').datetimepicker({
+    debug: false,
+    format: "YYYY-MM-DD",
+  });
+  $('#conference_finish').datetimepicker({
+    debug: false,
+    format: "YYYY-MM-DD",
+  });
   $('#conference_sale_from').datetimepicker({
     debug: false,
     format: "YYYY-MM-DD",

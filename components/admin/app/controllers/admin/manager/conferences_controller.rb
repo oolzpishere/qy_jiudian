@@ -59,6 +59,8 @@ module Admin
       def conference_params
         params.fetch(:conference, {}).permit(
           :name,
+          :start,
+          :finish,
           :sale_from,
           :sale_to
         )
@@ -69,6 +71,8 @@ module Admin
       def set_show_page_attributes
         @show_page_attributes = [
           :name,
+          :start,
+          :finish,
           :sale_from,
           :sale_to
         ]
@@ -77,6 +81,8 @@ module Admin
       def set_show_attributes
         @show_attributes = [
           :name,
+          :start,
+          :finish,
           :sale_from,
           :sale_to
         ]
@@ -86,6 +92,8 @@ module Admin
         @attribute_types = {
           # id: "Field::String",
           name: "Field::String",
+          start: "Field::DateTime",
+          finish: "Field::DateTime",
           sale_from: "Field::DateTime",
           sale_to: "Field::DateTime",
         }

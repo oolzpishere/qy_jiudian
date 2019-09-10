@@ -27,3 +27,8 @@ zh-CN:
               check_in_out: 入住日期
               nights: 天数（天）
               total_price: 房费小计
+              actual_settlement: 实际结算
+              profit: 利润营收
+              tax_rate: 税率
+              tax_point: 税点
+              actual_profit: 实际利润

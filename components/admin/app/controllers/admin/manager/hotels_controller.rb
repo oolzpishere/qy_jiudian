@@ -89,6 +89,7 @@ module Admin
           :other_twin_beds_settlement_price,
           :breakfast,
           :car,
+          :tax_rate,
           conference_ids: []
         )
       end
@@ -103,7 +104,7 @@ module Admin
       end
 
       def set_show_attributes
-        @show_attributes = [:id, :name, :twin_beds, :twin_beds_price, :twin_beds_settlement_price, :queen_bed, :queen_bed_price, :queen_bed_settlement_price, :three_beds, :three_beds_price, :three_beds_settlement_price, :other_twin_beds, :other_twin_beds_price,            :other_twin_beds_settlement_price, :breakfast, :car, :conferences]
+        @show_attributes = [:id, :name, :twin_beds, :twin_beds_price, :twin_beds_settlement_price, :queen_bed, :queen_bed_price, :queen_bed_settlement_price, :three_beds, :three_beds_price, :three_beds_settlement_price, :other_twin_beds, :other_twin_beds_price,            :other_twin_beds_settlement_price, :breakfast, :car, :tax_rate, :conferences]
       end
 
       def set_attribute_types

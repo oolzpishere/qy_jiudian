@@ -92,6 +92,22 @@ module Admin
       "#{checkin.month}月#{checkin.day}日-#{checkout.month}月#{checkout.day}日"
     end
 
+    def checkin_zh
+      checkin = order.checkin
+      "#{checkin.month}月#{checkin.day}日"
+    end
+
+    def checkout_zh
+      checkout = order.checkout
+      "#{checkout.month}月#{checkout.day}日"
+    end
+
+    def conference_period_zh
+      start = order.conference.start
+      finish = order.conference.finish
+      "#{start.month}月#{start.day}日-#{finish.month}月#{finish.day}日"
+    end
+
     def conference_check_in_out
       checkin = order.conference.sale_from
       checkout = order.conference.sale_to
@@ -138,6 +154,10 @@ module Admin
       order.hotel.send(order.room_type + "_price")
     end
 
+    def settlement_price
+      order.hotel.send(order.room_type + "_settlement_price")
+    end
+
     def price_zh
       "#{price}元/间/天"
     end
@@ -151,7 +171,25 @@ module Admin
       order.hotel.car == 0 ? "不含用车" : "含用车"
     end
 
+    def actual_settlement
+      settlement_price * nights
+    end
 
+    def profit
+      total_price - actual_settlement
+    end
+
+    def tax_rate
+      order.hotel.tax_rate
+    end
+
+    def tax_point
+      order.hotel.tax_point
+    end
+
+    def actual_profit
+      profit - (profit * tax_rate)
+    end
 
   end
 end
