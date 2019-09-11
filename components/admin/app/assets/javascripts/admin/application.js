@@ -22,5 +22,6 @@
 //= require admin/date_time_picker
 //= require admin/has_many
 //= require admin/order
+//= require admin/hotel
 //= require jquery.validate
 //= require jquery.validate.localization/messages_zh
