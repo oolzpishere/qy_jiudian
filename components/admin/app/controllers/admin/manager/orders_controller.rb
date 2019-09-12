@@ -34,13 +34,22 @@ module Admin
       1.times { @order.rooms.build } if @order.rooms.empty?
     end
 
+    def change_room_num(order, room_type, order_rooms_count)
+      if @order.hotel.send(room_type) >= order_rooms_count
+        @order.hotel[room_type] -= order_rooms_count
+      else
+        redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: '房间余量不足')
+      end
+    end
     # POST /orders
     def create
       @order = Product::Order.new(order_params)
+      room_type = @order.room_type
+      order_rooms_count = @order.rooms.count
+      change_room_num(@order, room_type, order_rooms_count)
 
       if @order.save
-        ::Admin::SendSms::Ali.new(@order, "order").send_sms
-        # @order.rooms_attributes.save
+        # ::Admin::SendSms::Ali.new(@order, "order").send_sms
         redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: 'Order was successfully created.')
       else
         render :new
