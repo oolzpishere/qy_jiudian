@@ -60,5 +60,6 @@ Gem::Specification.new do |spec|
   # spec.add_dependency 'client_side_validations'
   spec.add_dependency 'jquery-validation-rails'
 
+  spec.add_dependency "cocoon"
 
 end

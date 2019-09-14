@@ -15,6 +15,7 @@ require 'aliyun/sms'
 require 'axlsx_rails'
 # require 'client_side_validations'
 require 'jquery-validation-rails'
+require 'cocoon'
 
 require 'admin/order_data'
 require 'admin/send_sms'

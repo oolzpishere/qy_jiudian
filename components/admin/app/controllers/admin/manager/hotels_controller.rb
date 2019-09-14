@@ -29,6 +29,7 @@ module Admin
     def new
       @hotel = Product::Hotel.new
       1.times { @hotel.conferences.build }
+      @hotel.room_type_prices.build
     end
 
     # GET /manager/hotels/1/edit
@@ -75,22 +76,11 @@ module Admin
       def hotel_params
         params.fetch(:hotel, {}).permit(
           :name,
-          :twin_beds,
-          :queen_bed,
-          :three_beds,
-          :other_twin_beds,
-          :twin_beds_price,
-          :queen_bed_price,
-          :three_beds_price,
-          :other_twin_beds_price,
-          :twin_beds_settlement_price,
-          :queen_bed_settlement_price,
-          :three_beds_settlement_price,
-          :other_twin_beds_settlement_price,
           :breakfast,
           :car,
           :tax_rate,
-          conference_ids: []
+          conference_ids: [],
+          room_type_prices_attributes: [:id, :room_type_id, :price, :settlement_price, :_destroy]
         )
       end
 
@@ -104,7 +94,7 @@ module Admin
       end
 
       def set_show_attributes
-        @show_attributes = [:id, :name, :twin_beds, :twin_beds_price, :twin_beds_settlement_price, :queen_bed, :queen_bed_price, :queen_bed_settlement_price, :three_beds, :three_beds_price, :three_beds_settlement_price, :other_twin_beds, :other_twin_beds_price,            :other_twin_beds_settlement_price, :breakfast, :car, :tax_rate, :conferences]
+        # @show_attributes = [:id, :name, :twin_beds, :twin_beds_price, :twin_beds_settlement_price, :queen_bed, :queen_bed_price, :queen_bed_settlement_price, :three_beds, :three_beds_price, :three_beds_settlement_price, :other_twin_beds, :other_twin_beds_price,            :other_twin_beds_settlement_price, :breakfast, :car, :tax_rate, :conferences]
       end
 
       def set_attribute_types

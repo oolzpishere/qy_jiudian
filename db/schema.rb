@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_205150) do
+ActiveRecord::Schema.define(version: 2019_09_12_165402) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 2019_08_28_205150) do
 
   create_table "conferences", force: :cascade do |t|
     t.string "name"
+    t.date "start"
+    t.date "finish"
     t.date "sale_from"
     t.date "sale_to"
     t.datetime "created_at", null: false
@@ -39,15 +41,10 @@ ActiveRecord::Schema.define(version: 2019_08_28_205150) do
 
   create_table "hotels", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "twin_beds"
-    t.integer "queen_bed"
-    t.integer "three_beds"
-    t.integer "other_twin_beds"
-    t.integer "twin_beds_price"
-    t.integer "queen_bed_price"
-    t.integer "three_beds_price"
-    t.integer "other_twin_beds_price"
     t.integer "breakfast", default: 0
+    t.integer "car", default: 0
+    t.decimal "tax_rate", default: "0.0"
+    t.decimal "tax_point", default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -84,16 +81,34 @@ ActiveRecord::Schema.define(version: 2019_08_28_205150) do
     t.string "names"
     t.string "contact"
     t.string "phone"
-    t.integer "price"
+    t.decimal "price"
     t.integer "breakfast"
     t.date "checkin"
     t.date "checkout"
     t.integer "nights"
-    t.integer "total_price"
+    t.decimal "total_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["conference_id"], name: "index_orders_on_conference_id"
     t.index ["hotel_id"], name: "index_orders_on_hotel_id"
+  end
+
+  create_table "room_type_prices", force: :cascade do |t|
+    t.integer "hotel_id"
+    t.integer "room_type_id"
+    t.decimal "price"
+    t.decimal "settlement_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hotel_id"], name: "index_room_type_prices_on_hotel_id"
+    t.index ["room_type_id"], name: "index_room_type_prices_on_room_type_id"
+  end
+
+  create_table "room_types", force: :cascade do |t|
+    t.string "name"
+    t.string "name_eng"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "rooms", force: :cascade do |t|

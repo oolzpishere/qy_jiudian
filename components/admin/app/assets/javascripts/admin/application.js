@@ -25,3 +25,4 @@
 //= require admin/hotel
 //= require jquery.validate
 //= require jquery.validate.localization/messages_zh
+//= require cocoon

@@ -21,65 +21,28 @@
     <%= form.select(:conference_ids, Product::Conference.all.collect {|item| [ item.name, item.id ] },{},{:multiple => true, id: "hotel_conference_selection", class: ""})%>
   </div>
 
-  <div class="form-group">
-    <%= form.label t('.twin_beds'), class: "h6" %>
-    <%= form.text_field :twin_beds, class: "form-control" %>
+  <div id="room_type_prices" class="mb-3">
+    <%= form.fields_for :room_type_prices do |room_type_prices_form| %>
+      <%= render 'room_type_price_fields', f: room_type_prices_form %>
+      <%= link_to_add_association '增加房型', form, :room_type_prices, {class: "btn btn-sm btn-primary"} %>
+    <% end %>
+  </div>
+  <!-- <div class="form-group">
+    <%# form.label t('.twin_beds'), class: "h6" %>
+    <%# form.text_field :twin_beds, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= form.label t('.twin_beds_price'), class: "h6" %>
-    <%= form.text_field :twin_beds_price, class: "form-control" %>
+    <%# form.label t('.twin_beds_price'), class: "h6" %>
+    <%# form.text_field :twin_beds_price, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= form.label t('.twin_beds_settlement_price'), class: "h6" %>
-    <%= form.text_field :twin_beds_settlement_price, class: "form-control" %>
-  </div>
+    <%# form.label t('.twin_beds_settlement_price'), class: "h6" %>
+    <%# form.text_field :twin_beds_settlement_price, class: "form-control" %>
+  </div> -->
 
-  <div class="form-group">
-    <%= form.label t('.queen_bed'), class: "h6" %>
-    <%= form.text_field :queen_bed, class: "form-control" %>
-  </div>
 
-  <div class="form-group">
-    <%= form.label t('.queen_bed_price'), class: "h6" %>
-    <%= form.text_field :queen_bed_price, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label t('.queen_bed_settlement_price'), class: "h6" %>
-    <%= form.text_field :queen_bed_settlement_price, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label t('.three_beds'), class: "h6" %>
-    <%= form.text_field :three_beds, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label t('.three_beds_price'), class: "h6" %>
-    <%= form.text_field :three_beds_price, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label t('.three_beds_settlement_price'), class: "h6" %>
-    <%= form.text_field :three_beds_settlement_price, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label t('.other_twin_beds'), class: "h6" %>
-    <%= form.text_field :other_twin_beds, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label t('.other_twin_beds_price'), class: "h6" %>
-    <%= form.text_field :other_twin_beds_price, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label t('.other_twin_beds_settlement_price'), class: "h6" %>
-    <%= form.text_field :other_twin_beds_settlement_price, class: "form-control" %>
-  </div>
 
   <div class="form-group">
     <%= form.label t('.breakfast'), class: "h6" %>

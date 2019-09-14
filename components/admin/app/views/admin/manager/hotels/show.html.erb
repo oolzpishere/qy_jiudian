@@ -7,25 +7,80 @@
   </thead>
 
   <tbody>
-    <% @show_attributes.each do |item| %>
+
+    <tr>
+      <td>
+        <%= t(".name") %>
+      </td>
+      <td>
+        <%= @hotel.try('name') %>
+      </td>
+    </tr>
+
+    <% @hotel.room_type_prices.each do |rtp| %>
       <tr>
         <td>
-          <%= t(".#{item}") %>
+          <%= t(".#{rtp.room_type.name_eng}_price") %>
         </td>
         <td>
-          <% case item.to_s %>
-          <% when /breakfast/ %>
-            <%= @hotel.breakfast == 0 ? "不含早" : "含早" %>
-          <% when /car/ %>
-            <%= @hotel.car == 0 ? "不含用车" : "含用车" %>
-          <% when /conferences/ %>
-            <%= @hotel.conferences.map {|c| c.name}.join(", ") %>
-          <% else %>
-            <%= @hotel.try(item) %>
-          <% end %>
+          <%= rtp.price %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <%= t(".#{rtp.room_type.name_eng}_settlement_price") %>
+        </td>
+        <td>
+          <%= rtp.settlement_price %>
         </td>
       </tr>
     <% end %>
+    <tr>
+      <td>
+        <%= t(".breakfast") %>
+      </td>
+      <td>
+        <%= @hotel.try('breakfast') == 0 ? "不含早" : "含早" %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <%= t(".car") %>
+      </td>
+      <td>
+        <%= @hotel.try('car') == 0 ? "不含用车" : "含用车" %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <%= t(".tax_rate") %>
+      </td>
+      <td>
+        <%= @hotel.try('tax_rate') %>
+      </td>
+    </tr>
+
+    <!-- <tr>
+      <td>
+        <%# t(".tax_point") %>
+      </td>
+      <td>
+        <%# @hotel.try('tax_point') %>
+      </td>
+    </tr> -->
+
+    <tr>
+      <td>
+        <%= t(".conferences") %>
+      </td>
+      <td>
+        <%= @hotel.conferences.map {|c| c.name}.join(", ") %>
+      </td>
+    </tr>
+
   </tbody>
 </table>
 <!-- <%# link_to '编辑', admin.edit_hotel_path(@hotel) %> | -->
