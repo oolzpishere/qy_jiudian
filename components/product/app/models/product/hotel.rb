@@ -8,5 +8,6 @@ module Product
     has_many :room_type_prices
     has_many :room_types, through: :room_type_prices
     accepts_nested_attributes_for :room_type_prices, reject_if: :all_blank, allow_destroy: true
+
   end
 end

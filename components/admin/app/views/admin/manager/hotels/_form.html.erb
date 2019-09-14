@@ -24,8 +24,8 @@
   <div id="room_type_prices" class="mb-3">
     <%= form.fields_for :room_type_prices do |room_type_prices_form| %>
       <%= render 'room_type_price_fields', f: room_type_prices_form %>
-      <%= link_to_add_association '增加房型', form, :room_type_prices, {class: "btn btn-sm btn-primary"} %>
     <% end %>
+    <%= link_to_add_association '增加房型', form, :room_type_prices, {class: "btn btn-sm btn-success"} %>
   </div>
   <!-- <div class="form-group">
     <%# form.label t('.twin_beds'), class: "h6" %>

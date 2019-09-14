@@ -69,3 +69,6 @@ zh-CN:
           room_type: 房型
           price: 现付价格
           settlement_price: 结算价格
+        date_room_fields:
+          date: 日期
+          rooms: 房间余量
