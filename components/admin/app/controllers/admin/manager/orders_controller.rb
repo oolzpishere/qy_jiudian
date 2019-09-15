@@ -34,21 +34,40 @@ module Admin
       1.times { @order.rooms.build } if @order.rooms.empty?
     end
 
-    def change_room_num(order, room_type, order_rooms_count)
-      if @order.hotel.send(room_type) >= order_rooms_count
-        @order.hotel[room_type] -= order_rooms_count
-      else
-        redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: '房间余量不足')
+    def change_room_num(order, checkin, checkout, order_rooms_change)
+      date_range_array = (checkin.strftime("%Y%m%d")..checkout.strftime("%Y%m%d")).to_a
+      date_range_array.pop
+      hotel_room_type = get_hotel_room_type(order)
+
+      date_range_array.each do |date|
+        date_room = hotel_room_type.date_rooms.find_by(date: date)
+        unless date_room
+          return false
+        end
+        date_room.rooms = date_room.rooms - order_rooms_change
+        date_room.save
       end
     end
+
+    def get_hotel_room_type(order)
+      room_type_id = order.hotel.room_types.find_by(name_eng: order.room_type).id
+      order.hotel.hotel_room_types.find_by(room_type_id: room_type_id)
+    end
+
     # POST /orders
     def create
       @order = Product::Order.new(order_params)
-      room_type = @order.room_type
-      order_rooms_count = @order.rooms.count
-      # change_room_num(@order, room_type, order_rooms_count)
+
+      checkin = @order.checkin
+      checkout = @order.checkout
+      order_rooms_change = @order.rooms.count
+
+      unless change_room_num(@order, checkin, checkout, order_rooms_change)
+        redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
+      end
 
       if @order.save
+
         # ::Admin::SendSms::Ali.new(@order, "order").send_sms
         redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: 'Order was successfully created.')
       else
@@ -58,7 +77,17 @@ module Admin
 
     # PATCH/PUT /orders/1
     def update
+      order_rooms_org = @order.rooms.count
+
       if @order.update(order_params)
+        checkin = @order.checkin
+        checkout = @order.checkout
+        order_rooms_change = @order.rooms.count - order_rooms_org
+
+        unless change_room_num(@order, checkin, checkout, order_rooms_change)
+          return redirect_back_or_default(admin.admin_root_path, notice: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
+        end
+
         redirect_back_or_default(admin.admin_root_path, notice: 'Order was successfully updated.')
       else
         render :edit

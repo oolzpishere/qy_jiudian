@@ -150,13 +150,16 @@ module Admin
       "#{order.rooms.count}间"
     end
 
-    def price
-      order.hotel.send(order.room_type + "_price")
+    def settlement_price
+      hotel_room_type = get_hotel_room_type(order)
+      order.hotel.hotel_room_types.find(hotel_room_type.id)
     end
 
-    def settlement_price
-      order.hotel.send(order.room_type + "_settlement_price")
+    def get_hotel_room_type(order)
+      room_type_id = order.hotel.room_types.find_by(name_eng: order.room_type).id
+      order.hotel.hotel_room_types.find_by(room_type_id: room_type_id)
     end
+
 
     def price_zh
       "#{price}元/间/天"

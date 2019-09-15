@@ -6,6 +6,7 @@ $(document).on("ready page:load turbolinks:load", function() {
     conference_id = conference_and_hotel['conference'],
     hotel_id = conference_and_hotel['hotel'];
 
+    // send_sms
     $('#send_sms').on('click',function(){
       var allChecked = getAllChecked();
       var url = "/manager/orders/send_sms?conference_id=" + conference_id + "&hotel_id=" + hotel_id;
@@ -17,6 +18,7 @@ $(document).on("ready page:load turbolinks:load", function() {
       });
     });
 
+    // render_xlsx
     $(document).on('click','#render_xlsx',function(e){
       e.preventDefault();
       var allChecked = getAllChecked(),
