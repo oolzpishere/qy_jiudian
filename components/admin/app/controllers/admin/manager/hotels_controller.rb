@@ -19,10 +19,10 @@ module Admin
 
     # GET /manager/hotels/1
     def show
-      respond_to do |format|
-        format.html {}
-        format.json {render json: @hotel}
-      end
+      # respond_to do |format|
+      #   format.html {}
+      #   format.json {render json: @hotel}
+      # end
     end
 
     # GET /manager/hotels/new

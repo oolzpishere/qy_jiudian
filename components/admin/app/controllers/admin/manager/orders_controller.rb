@@ -46,7 +46,7 @@ module Admin
       @order = Product::Order.new(order_params)
       room_type = @order.room_type
       order_rooms_count = @order.rooms.count
-      change_room_num(@order, room_type, order_rooms_count)
+      # change_room_num(@order, room_type, order_rooms_count)
 
       if @order.save
         # ::Admin::SendSms::Ali.new(@order, "order").send_sms
@@ -127,9 +127,11 @@ module Admin
       end
 
       def hotel_room_types
-        true_room_types_array = @room_types_array.select {|name| @hotel[name] && @hotel[name] > 0}
+        # true_room_types_array = @room_types_array.select {|name| @hotel[name] && @hotel[name] > 0}
         @room_type_options = []
-        true_room_types_array.each {|name| @room_type_options << [@room_type_translate[name], name ]}
+        @hotel.room_types.each {|room_type| @room_type_options << [ room_type['name'], room_type['name_eng'] ]}
+
+        # true_room_types_array.each {|name| @room_type_options << [@room_type_translate[name], name ]}
       end
 
       # Use callbacks to share common setup or constraints between actions.

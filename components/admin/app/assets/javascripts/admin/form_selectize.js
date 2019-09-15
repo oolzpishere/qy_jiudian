@@ -50,7 +50,7 @@ $(document).on("ready page:load turbolinks:load", function() {
         });
       }
     },
-    // get hotel_hash
+    // get hotel_hash; resetRoomTypeOptions and resetAllHotelField;
     onChange: function(value) {
       if (!value.length) return;
       $.ajax({
@@ -68,6 +68,7 @@ $(document).on("ready page:load turbolinks:load", function() {
     }
   });
 
+  // set room_type_selected; onChange resetAllHotelField;
   $room_type_selection = $('#room_type_selection').selectize({
     valueField: 'db_name',
     labelField: 'name',
@@ -97,12 +98,16 @@ $(document).on("ready page:load turbolinks:load", function() {
 
 
   function resetAllHotelField(){
-    var price_db_name = room_type_selected + '_price';
-    if (hotel_hash) {
-      var hotel_price = hotel_hash[price_db_name]
+    // var price_db_name = room_type_selected + '_price';
+    if (hotel_hash["hotel_room_types"].length > 0) {
+      var hotel_room_type = hotel_hash["hotel_room_types"].find(function(element) {
+        return element["name_eng"] == room_type_selected;
+      });
+    }
+    if (hotel_room_type) {
+      var hotel_price = hotel_room_type['price']
       $('#order_price').val(hotel_price)
     }
-
   }
 
   var room_types_array = ["twin_beds", "queen_bed", "three_beds","other_twin_beds"];
@@ -111,18 +116,26 @@ $(document).on("ready page:load turbolinks:load", function() {
     room_type_selection.clear();
     room_type_selection.clearOptions();
 
-    var existingRoomTypeArray = [];
-    existingRoomTypeOptions = [];
-    room_types_array.forEach(function(element) {
-      if (hotel_hash && hotel_hash[element] > 0 ) {
-        existingRoomTypeArray.push(element);
-      }
-    });
+    // var existingRoomTypeArray = [];
+    var existingRoomTypeOptions = [];
 
-    existingRoomTypeArray.forEach(function(element){
-      var hash = {"db_name": element, "name": roomTypeTranslate[element]};
-        existingRoomTypeOptions.push(hash);
-    });
+    if (hotel_hash["room_types"].length > 0) {
+      hotel_hash["room_types"].forEach(function(element) {
+        var hash = {"db_name": element["name_eng"], "name": element["name"]};
+          existingRoomTypeOptions.push(hash);
+      });
+    }
+
+    // room_types_array.forEach(function(element) {
+    //   if (hotel_hash && hotel_hash[element] > 0 ) {
+    //     existingRoomTypeArray.push(element);
+    //   }
+    // });
+
+    // existingRoomTypeArray.forEach(function(element){
+    //   var hash = {"db_name": element, "name": roomTypeTranslate[element]};
+    //     existingRoomTypeOptions.push(hash);
+    // });
 
     room_type_selection.load(function(callback) {
       callback(existingRoomTypeOptions)
