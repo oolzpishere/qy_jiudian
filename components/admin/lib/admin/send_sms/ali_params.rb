@@ -21,7 +21,7 @@ module Admin
           "names" => order_data.all_names_string,
           "total_people" => order_data.peoples_count,
           "rooms" => order_data.room_type_zh + order_data.room_count_zh,
-          "price" => order_data.price,
+          "price" => order_data.send_command("price"),
           "breakfast" => "#{order_data.breakfast_boolean}"
          }.to_json
       end
@@ -35,7 +35,7 @@ module Admin
           "names" => order_data.all_names_string,
           "total_people" => order_data.peoples_count,
           "rooms" => order_data.room_type_zh + order_data.room_count_zh,
-          "price" => order_data.price,
+          "price" => order_data.send_command("price"),
           "breakfast" => "#{order_data.breakfast_boolean}",
           "car_usage" => "#{order_data.conference_period_zh}"
          }.to_json
@@ -50,7 +50,7 @@ module Admin
           "names" => order_data.all_names_string,
           "total_people" => order_data.peoples_count,
           "rooms" => order_data.room_type_zh + order_data.room_count_zh,
-          "price" => order_data.price,
+          "price" => order_data.send_command("price"),
           "breakfast" => "#{order_data.breakfast_boolean}"
          }.to_json
       end
