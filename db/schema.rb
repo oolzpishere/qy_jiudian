@@ -40,12 +40,23 @@ ActiveRecord::Schema.define(version: 2019_09_14_134905) do
   end
 
   create_table "date_rooms", force: :cascade do |t|
-    t.integer "room_type_price_id"
+    t.integer "hotel_room_type_id"
     t.date "date"
     t.integer "rooms"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["room_type_price_id"], name: "index_date_rooms_on_room_type_price_id"
+    t.index ["hotel_room_type_id"], name: "index_date_rooms_on_hotel_room_type_id"
+  end
+
+  create_table "hotel_room_types", force: :cascade do |t|
+    t.integer "hotel_id"
+    t.integer "room_type_id"
+    t.decimal "price"
+    t.decimal "settlement_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hotel_id"], name: "index_hotel_room_types_on_hotel_id"
+    t.index ["room_type_id"], name: "index_hotel_room_types_on_room_type_id"
   end
 
   create_table "hotels", force: :cascade do |t|
@@ -100,17 +111,6 @@ ActiveRecord::Schema.define(version: 2019_09_14_134905) do
     t.datetime "updated_at", null: false
     t.index ["conference_id"], name: "index_orders_on_conference_id"
     t.index ["hotel_id"], name: "index_orders_on_hotel_id"
-  end
-
-  create_table "room_type_prices", force: :cascade do |t|
-    t.integer "hotel_id"
-    t.integer "room_type_id"
-    t.decimal "price"
-    t.decimal "settlement_price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["hotel_id"], name: "index_room_type_prices_on_hotel_id"
-    t.index ["room_type_id"], name: "index_room_type_prices_on_room_type_id"
   end
 
   create_table "room_types", force: :cascade do |t|

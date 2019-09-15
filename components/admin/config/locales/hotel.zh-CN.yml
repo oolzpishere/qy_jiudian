@@ -65,7 +65,7 @@ zh-CN:
           check_in_out: 入住日期
           nights: 天数（天）
           tax_rate: 税率
-        room_type_price_fields:
+        hotel_room_type_fields:
           room_type: 房型
           price: 现付价格
           settlement_price: 结算价格

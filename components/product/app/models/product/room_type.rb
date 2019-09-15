@@ -2,8 +2,8 @@ module Product
   class RoomType < ApplicationRecord
     self.table_name = :room_types
 
-    has_many :room_type_prices
-    has_many :hotels, through: :room_type_prices
+    has_many :hotel_room_types
+    has_many :hotels, through: :hotel_room_types
 
     # Product::RoomType.create(name: "标双", name_eng: "twin_beds")
     # Product::RoomType.create(name: "标单", name_eng: "queen_bed")

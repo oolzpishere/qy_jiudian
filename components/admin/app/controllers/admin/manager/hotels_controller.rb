@@ -29,7 +29,7 @@ module Admin
     def new
       @hotel = Product::Hotel.new
       1.times { @hotel.conferences.build }
-      @hotel_room_type = @hotel.room_type_prices.build
+      @hotel_room_type = @hotel.hotel_room_types.build
       @hotel_room_type.date_rooms.build
     end
 
@@ -81,7 +81,7 @@ module Admin
           :car,
           :tax_rate,
           conference_ids: [],
-          room_type_prices_attributes: [:id, :room_type_id, :price, :settlement_price, :_destroy, date_rooms_attributes: [:id, :date, :rooms, :_destroy ] ]
+          hotel_room_types_attributes: [:id, :room_type_id, :price, :settlement_price, :_destroy, date_rooms_attributes: [:id, :date, :rooms, :_destroy ] ]
         )
       end
 

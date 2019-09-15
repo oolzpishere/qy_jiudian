@@ -17,22 +17,22 @@
       </td>
     </tr>
 
-    <% @hotel.room_type_prices.each do |rtp| %>
+    <% @hotel.hotel_room_types.each do |rt| %>
       <tr>
         <td>
-          <%= t(".#{rtp.room_type.name_eng}_price") %>
+          <%= t(".#{rt.room_type.name_eng}_price") %>
         </td>
         <td>
-          <%= rtp.price %>
+          <%= rt.price %>
         </td>
       </tr>
 
       <tr>
         <td>
-          <%= t(".#{rtp.room_type.name_eng}_settlement_price") %>
+          <%= t(".#{rt.room_type.name_eng}_settlement_price") %>
         </td>
         <td>
-          <%= rtp.settlement_price %>
+          <%= rt.settlement_price %>
         </td>
       </tr>
     <% end %>

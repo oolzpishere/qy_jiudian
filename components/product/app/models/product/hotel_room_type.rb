@@ -1,6 +1,6 @@
 module Product
-  class RoomTypePrice < ApplicationRecord
-    self.table_name = :room_type_prices
+  class HotelRoomType < ApplicationRecord
+    self.table_name = :hotel_room_types
 
     belongs_to :hotel
     belongs_to :room_type
