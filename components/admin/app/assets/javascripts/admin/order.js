@@ -27,6 +27,13 @@ $(document).on("ready page:load turbolinks:load", function() {
       var $preparingFileModal = $("#preparing-file-modal");
       $preparingFileModal.dialog({ modal: true });
 
+      // if
+      if (allChecked.length == 0) {
+        $preparingFileModal.dialog('close');
+        $("#choice-modal").dialog({ modal: true });
+        return false;
+      }
+
       $.fileDownload(url, {
         httpMethod: "POST",
         data: {orders: JSON.stringify(allChecked)},

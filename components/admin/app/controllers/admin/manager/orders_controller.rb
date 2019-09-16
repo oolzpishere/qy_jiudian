@@ -46,7 +46,7 @@ module Admin
         redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
         return
       end
-      
+
       if @order.save
 
         ::Admin::SendSms::Ali.new(@order, "order").send_sms
@@ -95,6 +95,11 @@ module Admin
       orders_string = params[:orders]
       orders_array = JSON.parse(orders_string)
       @orders = Product::Order.order(:id).find(orders_array)
+
+      if @orders.empty?
+        flash[:notice] = ("请勾选需要生成的订单。")
+        return false
+      end
 
       respond_to do |format|
          format.xlsx {
