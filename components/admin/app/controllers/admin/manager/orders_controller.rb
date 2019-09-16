@@ -60,15 +60,15 @@ module Admin
 
       checkin = @order.checkin
       checkout = @order.checkout
-      order_rooms_change = @order.rooms.count
-
+      order_rooms_change = @order.rooms.length
+      byebug
       unless change_room_num(@order, checkin, checkout, order_rooms_change)
         redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
       end
 
       if @order.save
 
-        # ::Admin::SendSms::Ali.new(@order, "order").send_sms
+        ::Admin::SendSms::Ali.new(@order, "order").send_sms
         redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: 'Order was successfully created.')
       else
         render :new
@@ -77,12 +77,12 @@ module Admin
 
     # PATCH/PUT /orders/1
     def update
-      order_rooms_org = @order.rooms.count
+      order_rooms_org = @order.rooms.length
 
       if @order.update(order_params)
         checkin = @order.checkin
         checkout = @order.checkout
-        order_rooms_change = @order.rooms.count - order_rooms_org
+        order_rooms_change = @order.rooms.length - order_rooms_org
 
         unless change_room_num(@order, checkin, checkout, order_rooms_change)
           return redirect_back_or_default(admin.admin_root_path, notice: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
