@@ -109,6 +109,8 @@ $(document).on("ready page:load turbolinks:load", function() {
       var hotel_price = hotel_room_type['price']
       $('#order_price').val(hotel_price)
     }
+
+    $('#breakfast_selection').val(hotel_hash["breakfast"])
   }
 
   var room_types_array = ["twin_beds", "queen_bed", "three_beds","other_twin_beds"];

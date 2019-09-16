@@ -79,11 +79,11 @@
             <%= nest_form.label t("." + name) %>
             <%= nest_form.text_field name %>
           <% end %>
-          <%= nest_form.check_box :_destroy%>
+          <%= nest_form.check_box :_destroy%> 删除
           </li>
       <% end %>
     </ul>
-    <a id="has-many-addmore" href="#">加入房间</a>
+    <a id="has-many-addmore" href="#" class="btn btn-sm btn-success">加入房间</a>
   </div>
 
   <div class="form-group">

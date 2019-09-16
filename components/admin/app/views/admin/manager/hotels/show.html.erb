@@ -17,7 +17,8 @@
       </td>
     </tr>
 
-    <% @hotel.hotel_room_types.each do |rt| %>
+    <% hotel_room_types = @hotel.hotel_room_types %>
+    <% hotel_room_types.each do |rt| %>
       <tr>
         <td>
           <%= t(".#{rt.room_type.name_eng}_price") %>
@@ -36,6 +37,26 @@
         </td>
       </tr>
     <% end %>
+
+    <% hotel_room_types.each do |rt| %>
+      <tr>
+        <td colspan="2" style="text-align: center;">
+          <%= rt.room_type.name %>
+        </td>
+      </tr>
+
+      <% rt.date_rooms.each do |date_room| %>
+        <tr>
+          <td>
+            <%= date_room.date %>
+          </td>
+          <td>
+            <%= date_room.rooms %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+
     <tr>
       <td>
         <%= t(".breakfast") %>
