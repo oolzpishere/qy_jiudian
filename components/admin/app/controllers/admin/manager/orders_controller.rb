@@ -44,8 +44,9 @@ module Admin
 
       unless change_room_num(@order, checkin, checkout, order_rooms_change)
         redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
+        return
       end
-
+      
       if @order.save
 
         ::Admin::SendSms::Ali.new(@order, "order").send_sms
