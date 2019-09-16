@@ -43,14 +43,14 @@ module Admin
       order_rooms_change = @order.rooms.length
 
       unless change_room_num(@order, checkin, checkout, order_rooms_change)
-        redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
+        redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), alert: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
         return
       end
 
       if @order.save
 
         ::Admin::SendSms::Ali.new(@order, "order").send_sms
-        redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: 'Order was successfully created.')
+        redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: '订单创建成功。')
       else
         render :new
       end
@@ -60,16 +60,17 @@ module Admin
     def update
       order_rooms_org = @order.rooms.length
 
-      if @order.update(order_params)
-        checkin = @order.checkin
-        checkout = @order.checkout
-        order_rooms_change = @order.rooms.length - order_rooms_org
+      @order.assign_attributes(order_params)
+      checkin = @order.checkin
+      checkout = @order.checkout
+      order_rooms_change = @order.rooms.length - order_rooms_org
 
-        unless change_room_num(@order, checkin, checkout, order_rooms_change)
-          return redirect_back_or_default(admin.admin_root_path, notice: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
-        end
+      unless change_room_num(@order, checkin, checkout, order_rooms_change)
+        return redirect_back_or_default(admin.admin_root_path, alert: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
+      end
 
-        redirect_back_or_default(admin.admin_root_path, notice: 'Order was successfully updated.')
+      if @order.save
+        redirect_back_or_default(admin.admin_root_path, notice: '订单更新成功。')
       else
         render :edit
       end
@@ -85,7 +86,7 @@ module Admin
       change_room_num(@order, checkin, checkout, order_rooms_change)
 
       ::Admin::SendSms::Ali.new(@order, "cancel").send_sms
-      redirect_back(fallback_location: admin.admin_root_path,notice: 'Order was successfully destroyed.')
+      redirect_back(fallback_location: admin.admin_root_path,notice: '订单删除成功。')
     end
 
     def download

@@ -42,7 +42,7 @@ module Admin
       @hotel = Product::Hotel.new(hotel_params)
 
       if @hotel.save
-        redirect_to(admin.conference_hotels_path(@conference), notice: 'Hotel was successfully created.')
+        redirect_to(admin.conference_hotels_path(@conference), notice: '酒店创建成功。')
       else
         render :new
       end
@@ -51,7 +51,7 @@ module Admin
     # PATCH/PUT /manager/hotels/1
     def update
       if @hotel.update(hotel_params)
-        redirect_back_or_default(admin.admin_root_path, notice: 'Hotel was successfully updated.')
+        redirect_back_or_default(admin.admin_root_path, notice: '酒店更新成功。')
       else
         render :edit
       end
@@ -60,7 +60,7 @@ module Admin
     # DELETE /manager/hotels/1
     def destroy
       @hotel.destroy
-      redirect_back(fallback_location: admin.admin_root_path,notice: 'Hotel was successfully destroyed.')
+      redirect_back(fallback_location: admin.admin_root_path,notice: '酒店删除成功。')
     end
 
     private
