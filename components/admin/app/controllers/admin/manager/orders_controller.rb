@@ -34,26 +34,6 @@ module Admin
       1.times { @order.rooms.build } if @order.rooms.empty?
     end
 
-    def change_room_num(order, checkin, checkout, order_rooms_change)
-      date_range_array = (checkin.strftime("%Y%m%d")..checkout.strftime("%Y%m%d")).to_a
-      date_range_array.pop
-      hotel_room_type = get_hotel_room_type(order)
-
-      date_range_array.each do |date|
-        date_room = hotel_room_type.date_rooms.find_by(date: date)
-        unless date_room
-          return false
-        end
-        date_room.rooms = date_room.rooms - order_rooms_change
-        date_room.save
-      end
-    end
-
-    def get_hotel_room_type(order)
-      room_type_id = order.hotel.room_types.find_by(name_eng: order.room_type).id
-      order.hotel.hotel_room_types.find_by(room_type_id: room_type_id)
-    end
-
     # POST /orders
     def create
       @order = Product::Order.new(order_params)
@@ -61,7 +41,7 @@ module Admin
       checkin = @order.checkin
       checkout = @order.checkout
       order_rooms_change = @order.rooms.length
-      byebug
+
       unless change_room_num(@order, checkin, checkout, order_rooms_change)
         redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
       end
@@ -97,6 +77,12 @@ module Admin
     # DELETE /orders/1
     def destroy
       @order.destroy
+      checkin = @order.checkin
+      checkout = @order.checkout
+      order_rooms_change = -@order.rooms.length
+
+      change_room_num(@order, checkin, checkout, order_rooms_change)
+
       ::Admin::SendSms::Ali.new(@order, "cancel").send_sms
       redirect_back(fallback_location: admin.admin_root_path,notice: 'Order was successfully destroyed.')
     end
@@ -216,6 +202,26 @@ module Admin
         #   nights: "Field::Number",
         #   total_price: "Field::Number",
         # }
+      end
+
+      def change_room_num(order, checkin, checkout, order_rooms_change)
+        date_range_array = (checkin.strftime("%Y%m%d")..checkout.strftime("%Y%m%d")).to_a
+        date_range_array.pop
+        hotel_room_type = get_hotel_room_type(order)
+
+        date_range_array.each do |date|
+          date_room = hotel_room_type.date_rooms.find_by(date: date)
+          unless date_room
+            return false
+          end
+          date_room.rooms = date_room.rooms - order_rooms_change
+          date_room.save
+        end
+      end
+
+      def get_hotel_room_type(order)
+        room_type_id = order.hotel.room_types.find_by(name_eng: order.room_type).id
+        order.hotel.hotel_room_types.find_by(room_type_id: room_type_id)
       end
 
 
