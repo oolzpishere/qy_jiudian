@@ -19,6 +19,11 @@ $(function () {
     debug: false,
     format: "YYYY-MM-DD",
   });
+  // hotel form date_rooms
+  $('.date_for_rooms').datetimepicker({
+    debug: false,
+    format: "YYYY-MM-DD",
+  });
 
 
   $('#order_checkin').datetimepicker({

@@ -5,4 +5,12 @@ $(document).on("ready page:load turbolinks:load", function() {
   if ($('#hotel_tax_rate').length > 0 && $('#hotel_tax_rate').val().length == 0) {
     $('#hotel_tax_rate').val("0.15")
   }
+
+  $('.date_rooms').on('cocoon:after-insert', function(e, insertedItem, originalEvent) {
+    $('.date_for_rooms').datetimepicker({
+      debug: false,
+      format: "YYYY-MM-DD",
+    });
+  })
+
 });

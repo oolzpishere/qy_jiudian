@@ -14,13 +14,13 @@
     <%= f.text_field :settlement_price, class: "form-control" %>
   </div>
 
-  <%= link_to_remove_association "删除房型", f, {class: "btn btn-sm btn-danger"} %>
-
+  <!-- 增加日期/房间余量 -->
   <div class="date_rooms mb-3">
     <%= f.fields_for :date_rooms do |date_room_form| %>
       <%= render 'date_room_fields', f: date_room_form %>
     <% end %>
-    <%= link_to_add_association '增加日期/房间余量', f, :date_rooms, {class: "btn btn-sm btn-primary"} %>
+    <%= link_to_add_association '增加日期/房间余量', f, :date_rooms, {class: "add_date btn btn-sm btn-primary"} %>
   </div>
 
+  <%= link_to_remove_association "删除房型", f, {class: "btn btn-sm btn-danger"} %>
 </div>
