@@ -6,6 +6,15 @@ $(document).on("ready page:load turbolinks:load", function() {
     $('#hotel_tax_rate').val("0.15")
   }
 
+  $('#hotel_room_types').on('cocoon:after-insert', function(e, insertedItem, originalEvent) {
+    $('.date_rooms').on('cocoon:after-insert', function(e, insertedItem, originalEvent) {
+      $('.date_for_rooms').datetimepicker({
+        debug: false,
+        format: "YYYY-MM-DD",
+      });
+    })
+  })
+
   $('.date_rooms').on('cocoon:after-insert', function(e, insertedItem, originalEvent) {
     $('.date_for_rooms').datetimepicker({
       debug: false,
