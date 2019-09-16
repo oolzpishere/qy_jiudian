@@ -58,7 +58,7 @@ $(document).on("ready page:load turbolinks:load", function() {
 
     function get_conference_and_hotel_by_path(){
       var current_path = window.location.pathname,
-        regex = /conferences\/(\d)\/hotels\/(\d)/,
+        regex = /conferences\/(\d+)\/hotels\/(\d+)/,
         regex_result = regex.exec(window.location.pathname),
         conference_id = regex_result[1],
         hotel_id = regex_result[2]
