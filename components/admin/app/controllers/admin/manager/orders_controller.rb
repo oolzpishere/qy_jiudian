@@ -62,7 +62,7 @@ module Admin
 
       @order.assign_attributes(order_params)
 
-      
+
       if @order.save
         checkin = @order.checkin
         checkout = @order.checkout
@@ -154,7 +154,7 @@ module Admin
       def hotel_room_types
         # true_room_types_array = @room_types_array.select {|name| @hotel[name] && @hotel[name] > 0}
         @room_type_options = []
-        @hotel.room_types.each {|room_type| @room_type_options << [ room_type['name'], room_type['name_eng'] ]}
+        @hotel.room_types.order(:position).each {|room_type| @room_type_options << [ room_type['name'], room_type['name_eng'] ]}
 
         # true_room_types_array.each {|name| @room_type_options << [@room_type_translate[name], name ]}
       end
