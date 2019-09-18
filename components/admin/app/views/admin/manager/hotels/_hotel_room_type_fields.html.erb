@@ -1,7 +1,7 @@
 <div class="nested-fields shadow p-3 rounded mb-3">
   <div class="form-group">
     <%= f.label t('.room_type'), class: "h6" %>
-    <%= f.select(:room_type_id, Product::RoomType.all.collect {|item| [ item.name, item.id ] },{ include_blank: true },{ id: "hotel_room_type_selection", class: ""})%>
+    <%= f.select(:room_type_id, Product::RoomType.all.order(:position).collect {|item| [ item.name, item.id ] },{ include_blank: true },{ id: "hotel_room_type_selection", class: ""})%>
   </div>
 
   <div class="form-group">
