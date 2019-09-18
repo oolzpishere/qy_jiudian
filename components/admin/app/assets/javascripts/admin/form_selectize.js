@@ -155,6 +155,8 @@ $(document).on("ready page:load turbolinks:load", function() {
       }
 
       tbl = document.getElementById('order_date_rooms_tbody')
+      // remove current tbody rows
+      $('#order_date_rooms_tbody tr').remove()
 
       hotel_room_types.forEach(function(hotel_room_type) {
         var tr = tbl.insertRow();
