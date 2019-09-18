@@ -62,7 +62,7 @@ module Admin
 
       @order.assign_attributes(order_params)
 
-
+      
       if @order.save
         checkin = @order.checkin
         checkout = @order.checkout
@@ -212,6 +212,10 @@ module Admin
         #   nights: "Field::Number",
         #   total_price: "Field::Number",
         # }
+      end
+
+      def date_rooms_available?
+
       end
 
       def change_room_num(order, checkin, checkout, order_rooms_change)
