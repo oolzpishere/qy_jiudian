@@ -212,7 +212,7 @@ module Admin
       end
 
       def change_room_num(order, checkin, checkout, order_rooms_change)
-        date_range_array = (Date.parse(checkin)..Date.parse(checkout)).to_a
+        date_range_array = (checkin..checkout).to_a
         date_range_array.pop
         hotel_room_type = get_hotel_room_type(order)
 
