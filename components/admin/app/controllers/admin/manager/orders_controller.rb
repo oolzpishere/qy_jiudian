@@ -224,7 +224,7 @@ module Admin
           end
 
           rooms = date_room.rooms - order_rooms_change
-          unless rooms < 0
+          if rooms < 0
             return false
           end
         end
@@ -240,6 +240,7 @@ module Admin
       end
 
       def get_hotel_room_type(order)
+        # where return array or single?
         # Product::HotelRoomType.joins(:room_type).where(hotel: order.hotel, room_types: {name_eng: order.room_type})
         room_type_id = order.hotel.room_types.find_by(name_eng: order.room_type).id
         order.hotel.hotel_room_types.find_by(room_type_id: room_type_id)
