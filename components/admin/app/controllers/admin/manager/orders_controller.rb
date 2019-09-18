@@ -61,15 +61,17 @@ module Admin
       order_rooms_org = @order.rooms.length
 
       @order.assign_attributes(order_params)
-      checkin = @order.checkin
-      checkout = @order.checkout
-      order_rooms_change = @order.rooms.length - order_rooms_org
 
-      unless change_room_num(@order, checkin, checkout, order_rooms_change)
-        return redirect_back_or_default(admin.admin_root_path, alert: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
-      end
 
       if @order.save
+        checkin = @order.checkin
+        checkout = @order.checkout
+        order_rooms_change = @order.rooms.length - order_rooms_org
+
+        unless change_room_num(@order, checkin, checkout, order_rooms_change)
+          return redirect_back_or_default(admin.admin_root_path, alert: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
+        end
+
         redirect_back_or_default(admin.admin_root_path, notice: '订单更新成功。')
       else
         render :edit
@@ -231,9 +233,6 @@ module Admin
 
         date_range_array.each do |date|
           date_room = hotel_room_type.date_rooms.find_by(date: date)
-          unless date_room
-            return false
-          end
           date_room.rooms = date_room.rooms - order_rooms_change
           date_room.save
         end
