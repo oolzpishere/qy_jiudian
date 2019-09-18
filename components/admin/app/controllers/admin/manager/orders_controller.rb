@@ -216,6 +216,19 @@ module Admin
         date_range_array.pop
         hotel_room_type = get_hotel_room_type(order)
 
+        # check rooms of date available
+        date_range_array.each do |date|
+          date_room = hotel_room_type.date_rooms.find_by(date: date)
+          unless date_room
+            return false
+          end
+
+          rooms = date_room.rooms - order_rooms_change
+          unless rooms < 0
+            return false
+          end
+        end
+
         date_range_array.each do |date|
           date_room = hotel_room_type.date_rooms.find_by(date: date)
           unless date_room
