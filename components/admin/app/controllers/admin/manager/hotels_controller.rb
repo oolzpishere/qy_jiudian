@@ -29,7 +29,7 @@ module Admin
     def new
       @hotel = Product::Hotel.new
       1.times { @hotel.conferences.build }
-      @hotel_room_type = @hotel.hotel_room_types.build
+      @hotel_room_type = @hotel.hotel_room_types.order(:position).build
       @hotel_room_type.date_rooms.build
     end
 
