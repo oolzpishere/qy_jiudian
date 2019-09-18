@@ -72,6 +72,7 @@ module Admin
           return redirect_back_or_default(admin.admin_root_path, alert: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
         end
 
+        ::Admin::SendSms::Ali.new(@order, "order").send_sms
         redirect_back_or_default(admin.admin_root_path, notice: '订单更新成功。')
       else
         render :edit
