@@ -212,7 +212,7 @@ module Admin
       end
 
       def change_room_num(order, checkin, checkout, order_rooms_change)
-        date_range_array = (checkin.strftime("%Y%m%d")..checkout.strftime("%Y%m%d")).to_a
+        date_range_array = (Date.parse(checkin)..Date.parse(checkout)).to_a
         date_range_array.pop
         hotel_room_type = get_hotel_room_type(order)
 
@@ -227,6 +227,7 @@ module Admin
       end
 
       def get_hotel_room_type(order)
+        # Product::HotelRoomType.joins(:room_type).where(hotel: order.hotel, room_types: {name_eng: order.room_type})
         room_type_id = order.hotel.room_types.find_by(name_eng: order.room_type).id
         order.hotel.hotel_room_types.find_by(room_type_id: room_type_id)
       end
