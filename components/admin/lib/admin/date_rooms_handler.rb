@@ -20,7 +20,7 @@ module DateRoomsHandler
       date_range_array_now.each do |date|
 
         # find by date
-        date_room = get_date_room(available_date_rooms, date)
+        return false unless date_room = get_date_room(available_date_rooms, date)
         # check rooms
         return false unless ( date_room.rooms - order_rooms_change(date_room) ) >= 0
       end

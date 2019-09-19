@@ -60,11 +60,11 @@ module Admin
     def update
       date_rooms_handler = DateRoomsHandler::Update.new(order: @order )
 
+      @order.assign_attributes(order_params)
       unless date_rooms_handler.check_all_date_rooms
         return redirect_back_or_default(admin.admin_root_path, alert: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
       end
 
-      @order.assign_attributes(order_params)
       if @order.save
 
         date_rooms_handler.handle_date_rooms
