@@ -6,7 +6,8 @@ json.room_types @hotel.room_types do |room_type|
 end
 
 # HasMany hotel_room_types
-json.hotel_room_types @hotel.hotel_room_types.order(:position) do |hotel_room_type|
+# .order(:position)
+json.hotel_room_types @hotel.hotel_room_types do |hotel_room_type|
   json.(hotel_room_type, :id, :hotel_id, :room_type_id, :price, :settlement_price)
   json.name hotel_room_type.room_type.name
   json.name_eng hotel_room_type.room_type.name_eng

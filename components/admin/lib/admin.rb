@@ -19,6 +19,7 @@ require 'cocoon'
 
 require 'admin/order_data'
 require 'admin/send_sms'
+require 'admin/date_rooms_handler'
 
 
 module Admin

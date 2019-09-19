@@ -38,18 +38,18 @@ module Admin
     def create
       @order = Product::Order.new(order_params)
 
-      checkin = @order.checkin
-      checkout = @order.checkout
-      order_rooms_change = @order.rooms.length
+      date_rooms_handler = DateRoomsHandler::Create.new( order: @order )
 
-      unless change_room_num(@order, checkin, checkout, order_rooms_change)
+      unless date_rooms_handler.check_all_date_rooms
         redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), alert: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
         return
       end
 
       if @order.save
-
-        ::Admin::SendSms::Ali.new(@order, "order").send_sms
+        date_rooms_handler.handle_date_rooms
+        if ENV["RAILS_ENV"].match(/production/)
+          ::Admin::SendSms::Ali.new(@order, "order").send_sms
+        end
         redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), notice: '订单创建成功。')
       else
         render :new
@@ -58,21 +58,20 @@ module Admin
 
     # PATCH/PUT /orders/1
     def update
-      order_rooms_org = @order.rooms.length
+      date_rooms_handler = DateRoomsHandler::Update.new(order: @order )
+
+      unless date_rooms_handler.check_all_date_rooms
+        return redirect_back_or_default(admin.admin_root_path, alert: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
+      end
 
       @order.assign_attributes(order_params)
-
-
       if @order.save
-        checkin = @order.checkin
-        checkout = @order.checkout
-        order_rooms_change = @order.rooms.length - order_rooms_org
 
-        unless change_room_num(@order, checkin, checkout, order_rooms_change)
-          return redirect_back_or_default(admin.admin_root_path, alert: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
+        date_rooms_handler.handle_date_rooms
+        # order_rooms_change = @order.rooms.length - order_rooms_org
+        if ENV["RAILS_ENV"].match(/production/)
+          ::Admin::SendSms::Ali.new(@order, "order").send_sms
         end
-
-        ::Admin::SendSms::Ali.new(@order, "order").send_sms
         redirect_back_or_default(admin.admin_root_path, notice: '订单更新成功。')
       else
         render :edit
@@ -82,13 +81,13 @@ module Admin
     # DELETE /orders/1
     def destroy
       @order.destroy
-      checkin = @order.checkin
-      checkout = @order.checkout
-      order_rooms_change = -@order.rooms.length
+      date_rooms_handler = DateRoomsHandler::Destroy.new(order: @order )
+      date_rooms_handler.handle_date_rooms
 
-      change_room_num(@order, checkin, checkout, order_rooms_change)
+      if ENV["RAILS_ENV"].match(/production/)
+        ::Admin::SendSms::Ali.new(@order, "cancel").send_sms
+      end
 
-      ::Admin::SendSms::Ali.new(@order, "cancel").send_sms
       redirect_back(fallback_location: admin.admin_root_path,notice: '订单删除成功。')
     end
 
@@ -212,42 +211,6 @@ module Admin
         #   nights: "Field::Number",
         #   total_price: "Field::Number",
         # }
-      end
-
-      def date_rooms_available?
-
-      end
-
-      def change_room_num(order, checkin, checkout, order_rooms_change)
-        date_range_array = (checkin..checkout).to_a
-        date_range_array.pop
-        hotel_room_type = get_hotel_room_type(order)
-
-        # check rooms of date available
-        date_range_array.each do |date|
-          date_room = hotel_room_type.date_rooms.find_by(date: date)
-          unless date_room
-            return false
-          end
-
-          rooms = date_room.rooms - order_rooms_change
-          if rooms < 0
-            return false
-          end
-        end
-
-        date_range_array.each do |date|
-          date_room = hotel_room_type.date_rooms.find_by(date: date)
-          date_room.rooms = date_room.rooms - order_rooms_change
-          date_room.save
-        end
-      end
-
-      def get_hotel_room_type(order)
-        # where return array or single?
-        # Product::HotelRoomType.joins(:room_type).where(hotel: order.hotel, room_types: {name_eng: order.room_type})
-        room_type_id = order.hotel.room_types.find_by(name_eng: order.room_type).id
-        order.hotel.hotel_room_types.find_by(room_type_id: room_type_id)
       end
 
 

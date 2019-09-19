@@ -14,7 +14,6 @@ RSpec.feature "sign in", :type => :feature do
       fill_in 'manager[password]', with: 'password'
     end
     click_button 'commit'
-    # byebug
 
     expect(page).to have_content '登录成功'
   end
@@ -26,7 +25,6 @@ RSpec.feature "sign in", :type => :feature do
       fill_in 'manager[password]', with: 'password-wrong'
     end
     click_button 'commit'
-    # byebug
 
     expect(page).to have_content 'Email或密码错误'
   end
