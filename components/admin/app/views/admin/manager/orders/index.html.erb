@@ -4,7 +4,9 @@
     <% start = @conference.start %>
     <% finish = @conference.finish %>
     <% conference_period_zh = "#{start.month}月#{start.day}日-#{finish.month}月#{finish.day}日" %>
-    <span class="h4"><%= "#{@conference.name}(#{conference_period_zh})"%> > <%= @hotel.name%> > 订单</span>
+    <span class="h5"><%= "#{@conference.name}(#{conference_period_zh})"%></span>
+    </br>
+    <span class="h5"><%= @hotel.name%> > 订单</span>
     <span class="badge badge-pill badge-primary"><%= @orders.count %></span>
   </div>
   <div class="col-auto">
@@ -33,7 +35,7 @@
           <% order_data = ::Admin::OrderData.new(order: item) %>
           <% case spa.to_s %>
           <% when /names/ %>
-            <td><%= order_data.all_names_string %></td>
+            <td><%= order_data.all_names_string.truncate(16) %></td>
           <% else %>
             <td><%= order_data.send_command(spa) %></td>
           <% end %>

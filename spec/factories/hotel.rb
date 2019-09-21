@@ -9,6 +9,13 @@ FactoryBot.define do
     tax_point {"10"}
   end
 
+  factory :hotel_room_type do
+    hotel
+    room_type
+    price { "100" }
+    settlement_price {"200"}
+  end
+
   factory :hotel_new, class: "Product::Hotel" do
     id {1}
     name {"hotel-name-new"}

@@ -31,6 +31,7 @@ module DateRoomsHandler
       date_range_array.each do |date|
         # find by date
         date_room = get_date_room(available_date_rooms, date)
+        # ignore if date_room not exist
         next unless date_room
         date_room.rooms += add_rooms
         date_room.save
@@ -43,6 +44,7 @@ module DateRoomsHandler
       date_range_array.each do |date|
         # find by date
         date_room = get_date_room(available_date_rooms, date)
+        # ignore if date_room not exist
         next unless date_room
         date_room.rooms -= delete_rooms
         date_room.save
