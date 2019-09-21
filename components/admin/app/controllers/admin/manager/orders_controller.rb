@@ -80,13 +80,12 @@ module Admin
 
     # DELETE /orders/1
     def destroy
-      @order.destroy
-      date_rooms_handler = DateRoomsHandler::Destroy.new(order: @order )
-      date_rooms_handler.handle_date_rooms
-
       if Rails.env.match(/production/)
         ::Admin::SendSms::Ali.new(@order, "cancel").send_sms
       end
+      date_rooms_handler = DateRoomsHandler::Destroy.new(order: @order )
+      @order.destroy
+      date_rooms_handler.handle_date_rooms
 
       redirect_back(fallback_location: admin.admin_root_path,notice: '订单删除成功。')
     end

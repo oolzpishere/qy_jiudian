@@ -124,7 +124,7 @@ module DateRoomsHandler
   class Destroy < Base
     def handle_date_rooms
       # 加回最初的库存
-      add_date_rooms(before_date_range_array, order_rooms_change_to)
+      add_date_rooms(before_date_range_array, order_rooms_before)
     end
   end
 
