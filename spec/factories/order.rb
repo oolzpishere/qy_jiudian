@@ -1,6 +1,4 @@
 FactoryBot.define do
-
-
   factory :order, class: "Product::Order" do
     id {1}
     group {1}

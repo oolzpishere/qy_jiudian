@@ -12,7 +12,7 @@ json.hotel_room_types @hotel.hotel_room_types do |hotel_room_type|
   json.name hotel_room_type.room_type.name
   json.name_eng hotel_room_type.room_type.name_eng
   # HasMany date_rooms
-  json.date_rooms hotel_room_type.date_rooms do |date_room|
+  json.date_rooms hotel_room_type.date_rooms.order(:date) do |date_room|
     json.(date_room, :id, :hotel_room_type_id, :date, :rooms)
   end
 end

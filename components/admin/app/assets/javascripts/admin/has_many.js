@@ -41,6 +41,13 @@ $(document).on("ready page:load turbolinks:load", function() {
     e.preventDefault();
     e.stopPropagation();
     addMore("#rooms_ul")
+    // change rooms_count
+    $('#rooms_count').text( $("#rooms_ul li").length )
   });
+
+  // init order form rooms count
+  if ($('#rooms_count').length > 0) {
+    $('#rooms_count').text( $("#rooms_ul li").length )
+  }
 
 });

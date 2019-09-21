@@ -12,6 +12,11 @@
     </div>
   <% end %>
 
+  <% start = @conference.start %>
+  <% finish = @conference.finish %>
+  <% conference_period_zh = "#{start.month}月#{start.day}日-#{finish.month}月#{finish.day}日" %>
+  <span class="h5"><%= "#{@conference.name}(#{conference_period_zh})"%></span>
+
   <div class="form-group">
     <%= form.label t(".group"), class: "h6" %>
     <%= form.text_field :group, class: "form-control", required: true %>
@@ -56,8 +61,8 @@
     <%= form.text_field :nights, class: "form-control" %>
   </div>
 
-  <div class="col-6 p-0 shadow rounded">
-    <table id="order_date_rooms_table" class="table table-striped">
+  <div class="col-3 p-0 shadow rounded">
+    <table id="order_date_rooms_table" class="table table-sm table-striped">
       <thead>
         <tr>
           <th scope="col">日期</th>
@@ -84,6 +89,7 @@
       <% end %>
     </ul>
     <a id="has-many-addmore" href="#" class="btn btn-sm btn-success">加入房间</a>
+    <span id="rooms_count" class="badge badge-pill badge-success"></span>
   </div>
 
   <div class="form-group">

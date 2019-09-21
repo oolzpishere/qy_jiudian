@@ -4,15 +4,18 @@ zh-CN:
       orders:
         index:
           new_order: 创建订单
-          show: 查看详情
+          show: 查看
           edit: 编辑
           destroy: 删除
           group: 组数
           names: 姓名
           contact: 联系人
           phone: 联系方式
+          room_count_zh: 房间
+          check_in_out: 入住日期
+          nights: 天数
         edit:
-          show: 查看详情
+          show: 查看
           back: 返回
         form:
           group: 组数
