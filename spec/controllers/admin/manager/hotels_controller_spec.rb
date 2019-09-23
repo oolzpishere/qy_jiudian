@@ -67,7 +67,7 @@ RSpec.describe Admin::Manager::HotelsController, type: :controller do
           put :update, params: {id: hotel_new_params[:id], hotel: hotel_new_params}, session: valid_session
           hotel.reload
 
-          expect(hotel_org_attributes).to eq(hotel.attributes)
+          expect(hotel_org_attributes).to_not eq(hotel.attributes)
         end
       end
     end

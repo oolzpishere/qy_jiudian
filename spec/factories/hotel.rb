@@ -13,8 +13,13 @@ FactoryBot.define do
       after(:create) do |hotel, evaluator|
         room_type_first = create(:room_type)
         room_type_second = create(:room_type, name: "标准单人间", name_eng: "queen_bed", position: "20")
-        create(:hotel_room_type, hotel: hotel, room_type: room_type_first)
-        create(:hotel_room_type, hotel: hotel, room_type: room_type_second, price: 200, settlement_price: 300)
+
+        hotel_room_type_first = create(:hotel_room_type, hotel: hotel, room_type: room_type_first)
+        hotel_room_type_second = create(:hotel_room_type, hotel: hotel, room_type: room_type_second, price: 200, settlement_price: 300)
+
+        create(:date_room_first, hotel_room_type: hotel_room_type_first)
+        create(:date_room_second, hotel_room_type: hotel_room_type_first)
+
         # create_list(:hotel_room_type, evaluator.hotel_room_types_count, hotel: hotel)
       end
     end
@@ -31,6 +36,16 @@ FactoryBot.define do
     name {"标准双人间"}
     name_eng {"twin_beds"}
     position {"10"}
+  end
+
+  factory :date_room_first, class: "Product::DateRoom" do
+    date {"2019-10-30"}
+    rooms {25}
+  end
+
+  factory :date_room_second, class: "Product::DateRoom" do
+    date {"2019-10-31"}
+    rooms {25}
   end
 
   factory :hotel_new, class: "Product::Hotel" do
