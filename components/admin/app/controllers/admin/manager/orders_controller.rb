@@ -95,6 +95,11 @@ module Admin
 
       # @orders = Product::Order.all
       orders_string = params[:orders]
+      unless orders_string
+        flash[:notice] = ("请勾选需要生成的订单。")
+        return false
+      end
+
       orders_array = JSON.parse(orders_string)
       @orders = Product::Order.order(:id).find(orders_array)
 

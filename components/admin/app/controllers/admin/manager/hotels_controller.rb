@@ -76,6 +76,7 @@ module Admin
       # Only allow a trusted parameter "white list" through.
       def hotel_params
         params.fetch(:hotel, {}).permit(
+          :id,
           :name,
           :breakfast,
           :car,
