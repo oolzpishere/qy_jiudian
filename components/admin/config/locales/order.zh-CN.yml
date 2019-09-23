@@ -12,6 +12,7 @@ zh-CN:
           contact: 联系人
           phone: 联系方式
           room_count_zh: 房间
+          room_type_zh: 房型
           check_in_out: 入住日期
           nights: 天数
         edit:
