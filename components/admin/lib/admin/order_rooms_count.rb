@@ -13,7 +13,8 @@ module Admin
       orders.each do |order|
         date_range_array_buf = date_range_array(order)
         rooms_num = order.rooms.length
-        accumulate_date_rooms(date_range_array_buf, rooms_num)
+        room_type = order.room_type
+        accumulate_date_rooms(date_range_array_buf,room_type, rooms_num )
       end
       date_rooms_count_hash
     end
@@ -25,11 +26,12 @@ module Admin
       date_range_array
     end
 
-    def accumulate_date_rooms(date_range_array, rooms_num)
+    def accumulate_date_rooms(date_range_array, room_type, rooms_num)
       date_range_array.each do |date|
         date_string = date.to_s
-        date_rooms_count_hash[date_string] ||= 0
-        date_rooms_count_hash[date_string] += rooms_num
+        date_rooms_count_hash[room_type] ||= {}
+        date_rooms_count_hash[room_type][date_string] ||= 0
+        date_rooms_count_hash[room_type][date_string] += rooms_num
       end
     end
 

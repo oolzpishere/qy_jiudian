@@ -68,6 +68,8 @@
         </tr>
       </thead>
       <tbody>
+        <% orders_date_rooms_count_hash = Admin::OrderRoomsCount.new(@hotel_orders).set_date_rooms_count_hash %>
+
         <% included_hotel = Product::Hotel.includes(:room_types, hotel_room_types: [:room_type, :date_rooms]).find(@hotel.id) %>
         <% included_hotel.hotel_room_types.each do |item| %>
           <tr>
@@ -75,7 +77,7 @@
               <%= item.room_type.name %>
             </td>
           </tr>
-          <% orders_date_rooms_count_hash = Admin::OrderRoomsCount.new(@orders).set_date_rooms_count_hash %>
+
           <% item.date_rooms.order(:date).each do |date_room| %>
           <tr>
             <td>
@@ -84,7 +86,9 @@
             <td>
               <%= date_room.rooms %>
             </td>
-            <% ordered_rooms = orders_date_rooms_count_hash[date_room.date.to_s] %>
+            <% room_type_name_eng = item.room_type.name_eng %>
+            <% ordered_rooms =  orders_date_rooms_count_hash[room_type_name_eng] && orders_date_rooms_count_hash[room_type_name_eng][date_room.date.to_s] %>
+
             <td class="text-success">
               <%= ordered_rooms %>
             </td>
