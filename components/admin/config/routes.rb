@@ -2,6 +2,7 @@ Admin::Engine.routes.draw do
   scope path: "/manager", module: "manager" do
     post "/orders/download" => "orders#download"
     post "/orders/send_sms" => "orders#send_sms"
+    post "/orders/send_confirm_sms" => "orders#send_confirm_sms"
 
     resources :conferences do
       resources :hotels, only: [:index, :new, :create] do

@@ -39,7 +39,7 @@ module Admin
     def create
       @order = Product::Order.new(order_params)
 
-      date_rooms_handler = DateRoomsHandler::Create.new( order: @order )
+      date_rooms_handler = Admin::DateRoomsHandler::Create.new( order: @order )
 
       unless date_rooms_handler.check_all_date_rooms
         redirect_to(admin.conference_hotel_orders_path(@conference, @hotel), alert: '入住日期不在售卖范围内，请重新填写，或修改酒店售卖日期')
@@ -59,7 +59,7 @@ module Admin
 
     # PATCH/PUT /orders/1
     def update
-      date_rooms_handler = DateRoomsHandler::Update.new(order: @order )
+      date_rooms_handler = Admin::DateRoomsHandler::Update.new(order: @order )
 
       @order.assign_attributes(order_params)
       unless date_rooms_handler.check_all_date_rooms
@@ -84,7 +84,7 @@ module Admin
       if Rails.env.match(/production/)
         ::Admin::SendSms::Ali.new(@order, "cancel").send_sms
       end
-      date_rooms_handler = DateRoomsHandler::Destroy.new(order: @order )
+      date_rooms_handler = Admin::DateRoomsHandler::Destroy.new(order: @order )
       @order.destroy
       date_rooms_handler.handle_date_rooms
 
@@ -123,6 +123,15 @@ module Admin
       @orders = Product::Order.order(:id).find(orders_array)
 
       @orders.each {|order| ::Admin::SendSms::Ali.new(order, "order").send_sms }
+      # ::Admin::SendSms::Ali.new(@orders, "SMS_173472652").send_sms
+    end
+
+    def send_confirm_sms
+      orders_string = params[:orders]
+      orders_array = JSON.parse(orders_string)
+      @orders = Product::Order.order(:id).find(orders_array)
+
+      @orders.each {|order| ::Admin::SendSms::Ali.new(order, "confirm").send_sms }
       # ::Admin::SendSms::Ali.new(@orders, "SMS_173472652").send_sms
     end
 

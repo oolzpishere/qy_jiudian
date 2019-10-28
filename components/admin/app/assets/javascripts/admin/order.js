@@ -18,6 +18,18 @@ $(document).on("ready page:load turbolinks:load", function() {
       });
     });
 
+    // send_confirm_sms
+    $('#send_confirm_sms').on('click',function(){
+      var allChecked = getAllChecked();
+      var url = "/manager/orders/send_confirm_sms?conference_id=" + conference_id + "&hotel_id=" + hotel_id;
+      var request = $.ajax({
+        url: url,
+        method: "POST",
+        data: {orders: JSON.stringify(allChecked)},
+        dataType: "json"
+      });
+    });
+
     // render_xlsx
     $(document).on('click','#render_xlsx',function(e){
       e.preventDefault();

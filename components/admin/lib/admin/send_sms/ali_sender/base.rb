@@ -3,7 +3,7 @@ module Admin
     module AliSender
       class Base
         attr_reader :phone_numbers, :template_code, :template_param
-        def initialize(phone_numbers:, template_code:, template_param:)
+        def initialize(phone_numbers:, template_code:, template_param: nil)
           @phone_numbers = phone_numbers
           @template_code = template_code
           @template_param = template_param
@@ -19,6 +19,10 @@ module Admin
       end
 
       class OrderCar < Base
+
+      end
+
+      class Confirm < Base
 
       end
 

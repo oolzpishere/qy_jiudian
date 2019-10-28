@@ -43,6 +43,10 @@ module Admin
             # send_order_car_sms
           end
           # order_sms
+        when /confirm/
+          template_code = "SMS_176522171"
+          template_param = {}.to_json
+          AliSender::Confirm
         when /cancel/
           template_code = "SMS_173950836"
           template_param = AliParams.new(record, type).to_params
